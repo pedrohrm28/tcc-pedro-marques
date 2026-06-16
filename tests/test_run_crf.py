@@ -6,6 +6,7 @@ Cobre as funções puras de carregamento/mapeamento ner.csv<->GMB
 from __future__ import annotations
 
 import run_crf
+from src.io.contrato import ler_jsonl
 from src.io.corpora import carregar_gmb
 
 
@@ -53,3 +54,65 @@ def test_features_e_labels_preserva_ordem_e_comprimento():
     assert "__word__" not in primeira
     assert "sentence_idx" not in primeira
     assert "tag" not in primeira
+
+
+# ---------------------------------------------------------------------------
+# Task 3 — alinhamento do .jsonl emitido
+# ---------------------------------------------------------------------------
+
+
+class _CrfFake:
+    """CRF mínimo: prediz "O" para todo token (barato, sem treino).
+
+    O objetivo do teste é o ALINHAMENTO do .jsonl, não a acurácia.
+    """
+
+    rotulos = {"O"}
+
+    def predict_single(self, feats):
+        return ["O"] * len(feats)
+
+
+def test_jsonl_alinha_com_gold(tmp_path):
+    """O .jsonl emitido bate token-a-token (sentenca_id, posicao, token) com o gold."""
+    limite = 5
+    mapa = run_crf.carregar_features_ner()
+    gold = carregar_gmb(limite=limite)
+    crf = _CrfFake()
+
+    registros = run_crf.gerar_registros(crf, mapa, gold)
+    saida = tmp_path / "ner.jsonl"
+    run_crf.escrever_jsonl(str(saida), registros)
+
+    lidos = ler_jsonl(str(saida))
+
+    # Nº de registros == soma de len(s.pares).
+    total_tokens = sum(len(s.pares) for s in gold)
+    assert len(lidos) == total_tokens
+
+    # (sentenca_id, posicao, token) batem 1:1 com o gold, em ordem.
+    esperado = [
+        (s.sentenca_id, pos, tok)
+        for s in gold
+        for pos, (tok, _tag) in enumerate(s.pares)
+    ]
+    obtido = [(r.sentenca_id, r.posicao, r.token) for r in lidos]
+    assert obtido == esperado
+
+    # Toda tag_predita é um rótulo IOB plausível (aqui só "O" pelo CRF fake).
+    rotulos_validos = {"O"} | _CrfFake.rotulos
+    for r in lidos:
+        assert r.tarefa == "ner" and r.modelo == "crf"
+        assert r.tag_predita in rotulos_validos
+
+
+def test_gerar_registros_aborta_em_desalinhamento(tmp_path):
+    """Se os tokens do ner.csv não baterem com o gold, gerar_registros aborta."""
+    import pytest
+    from src.io.corpora import Sentenca
+
+    mapa = run_crf.carregar_features_ner()
+    # Sentença gold falsa com tokens que não existem no ner.csv para o sid "1".
+    falsa = Sentenca(sentenca_id="1.0", pares=[("ZZZ", "O"), ("YYY", "O")])
+    with pytest.raises(RuntimeError):
+        run_crf.gerar_registros(_CrfFake(), mapa, [falsa])
