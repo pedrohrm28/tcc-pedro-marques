@@ -22,7 +22,7 @@ Do contrato de dados ao relatório final: primeiro fixamos o formato `.jsonl` co
   1. Existe um módulo de I/O que lê `GMB_dataset.txt` em sentenças de (token, tag IOB) e `pt_bosque-ud-test.conllu` em sentenças de (token, UPOS).
   2. Há um schema/escritor `.jsonl` documentado (`{tarefa, modelo, sentenca_id, posicao, token, tag_predita}`) com helper de escrita/leitura.
   3. `requirements.txt` cobre as dependências (sklearn-crfsuite, scikit-learn, requests/ollama, etc.) e instala sem erro.
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
 - [ ] 01-01: Loaders de corpora (GMB IOB + CoNLL-U UPOS) e seleção dos subconjuntos (150 / 1167 sentenças)
