@@ -1,0 +1,33 @@
+# Requirements: TCC II — Comparativo LLMs open-source vs. modelos tradicionais
+
+## Scope
+
+v1: Pipeline reprodutível que roda 4 modelos (CRF, regras, gpt-oss 20B, gpt-oss 120B) sobre a base mapeada e produz uma tabela comparativa única + discrepâncias. Depois, geração e execução sobre a base nova.
+
+## Table Stakes
+
+- **REQ-01 — Contrato de saída comum**: formato `.jsonl` único que todo script de modelo emite (uma linha por token: `{tarefa, modelo, sentenca_id, posicao, token, tag_predita}`). É o que desacopla os modelos do agregador.
+- **REQ-05 — Agregador de métricas**: lê os `.jsonl` + gold, alinha token a token, calcula precisão/cobertura/F1 por classe, micro, e em nível de entidade (NER, esquema IOB). Saída em JSON.
+
+## Features
+
+- **REQ-02 — Baseline CRF (NER)**: `run_crf.py` treina o CRF a partir das features do `ner.csv`, prediz sobre o conjunto de teste GMB (150 sentenças), emite `.jsonl` no contrato comum. Modelo treinado persistido em disco para evitar re-treino.
+- **REQ-03 — Baseline baseado em regras (POS/UPOS)**: `run_regras.py` aplica a anotação por regras sobre o subconjunto Bosque (`.conllu`), emite UPOS no contrato comum.
+- **REQ-04 — Runner gpt-oss**: `run_gptoss.py --modelo gpt-oss:20b|120b --tarefa ner|upos`, via Ollama, com `temperature=0`/`seed=42`, parsing robusto da saída do LLM de volta para o contrato comum.
+- **REQ-06 — Saída final**: tabela comparativa dos 4 modelos lado a lado (Markdown/CSV) + CSV de discrepâncias token a token para análise qualitativa.
+- **REQ-07 — Base nova**: gerar sentenças inéditas fora de domínio (NER inglês + POS português), rodar os 4 modelos, agregar — cenário de generalização.
+
+## Out of Scope
+
+- Corpus de NER em português — NER herda o GMB (inglês) do TCC I.
+- Fine-tuning dos LLMs — usados prontos via Ollama.
+- Parsing de dependências sintáticas do Bosque (HEAD/DEPREL) — só UPOS.
+- Reaproveitar números do TCC I — re-rodamos os 4 no mesmo pipeline.
+
+## Success Criteria
+
+1. `python comparativo_gold.py` produz uma tabela com os 4 modelos × (precisão, cobertura, F1) para NER e para UPOS.
+2. CRF e regras rodam via código e geram `.jsonl` sem depender de números do TCC I.
+3. gpt-oss 20B e 120B rodam via Ollama de forma reprodutível.
+4. Existe CSV de discrepâncias token a token por modelo.
+5. O mesmo pipeline roda sobre a base nova quando ela existir.
