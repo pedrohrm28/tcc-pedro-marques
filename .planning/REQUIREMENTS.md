@@ -11,7 +11,7 @@ v1: Pipeline reprodutível que roda 4 modelos (CRF, regras, gpt-oss 20B, gpt-oss
 
 ## Features
 
-- **REQ-02 — Baseline CRF (NER)**: `run_crf.py` treina o CRF a partir das features do `ner.csv`, prediz sobre o conjunto de teste GMB (1167 sentenças — alinhado ao N do POS; evolução sobre as 150 do TCC I), emite `.jsonl` no contrato comum. Modelo treinado persistido em disco para evitar re-treino.
+- **REQ-02 — Baseline CRF (NER)** ✅ (02-01): `run_crf.py` treina o CRF a partir das features do `ner.csv`, prediz sobre o conjunto de teste GMB (1167 sentenças — alinhado ao N do POS; evolução sobre as 150 do TCC I), emite `.jsonl` no contrato comum. Modelo treinado persistido em disco para evitar re-treino.
 - **REQ-03 — Baseline baseado em regras (POS/UPOS)** ✅ (02-02): `run_regras.py` aplica a anotação por regras sobre o subconjunto Bosque (`.conllu`), emite UPOS no contrato comum.
 - **REQ-04 — Runner gpt-oss**: `run_gptoss.py --modelo gpt-oss:20b|120b --tarefa ner|upos`, via Ollama, com `temperature=0`/`seed=42`, parsing robusto da saída do LLM de volta para o contrato comum.
 - **REQ-06 — Saída final**: tabela comparativa dos 4 modelos lado a lado (Markdown/CSV) + CSV de discrepâncias token a token para análise qualitativa.

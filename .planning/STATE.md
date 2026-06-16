@@ -26,8 +26,8 @@ See: .planning/PROJECT.md (updated 2026-06-16)
 - **Initialized:** 2026-06-16
 - **Granularity:** coarse · **Workflow:** light (sem research/plan-check, com verifier)
 - **Phases:** 5 (ver ROADMAP.md)
-- **Next action:** executar `02-01` (run_crf) — único plano restante da Fase 2
-- **Last session:** Completed 02-02-PLAN.md (run_regras: UPOS por regras, 27604 tokens alinhados)
+- **Next action:** Fase 2 completa (02-01 + 02-02) — `/gsd-verify-work 2` e planejar Fase 3 (runner gpt-oss)
+- **Last session:** Completed 02-01-PLAN.md (run_crf: CRF NER, 25857 tokens alinhados, modelo cacheado)
 
 ## Decisions Log
 
@@ -36,6 +36,7 @@ See: .planning/PROJECT.md (updated 2026-06-16)
 - NER = GMB (inglês); POS = Bosque (português) — herdado do TCC I.
 - `GMB_dataset.txt` = gold de NER; `ner.csv` = input de features do CRF.
 - **NER usa 1167 sentenças** (= N do POS/Bosque), não as 150 do TCC I. Decisão (2026-06-16): priorizar robustez estatística sobre comparabilidade 1:1; apresentar como evolução do TCC I. GMB tem 2999 disponíveis; `limite` é parâmetro do loader, sem mudança de código na Fase 1. Impacto: ~7,8× mais chamadas de LLM nas Fases 3-4.
+- **CRF (02-01):** split explícito sem vazamento — teste = `carregar_gmb(limite=1167)`, treino = ids GMB 1168..2999 (1832 sentenças). ner.csv saneado na leitura (filtro de `sentence_idx` não-numérico + dedupe da duplicação de tokens). Modelo cacheado em `modelos/crf_ner.pkl` (gitignored), `--retrain` força re-treino.
 
 ## Notes
 

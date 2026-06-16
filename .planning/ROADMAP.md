@@ -39,7 +39,7 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 02-01: `run_crf.py` — treino + predição NER (sklearn-crfsuite, features do ner.csv)
+- [x] 02-01: `run_crf.py` — treino + predição NER (sklearn-crfsuite, features do ner.csv)
 - [x] 02-02: `run_regras.py` — anotação POS/UPOS por regras sobre o Bosque
 
 ### Phase 3: Runner gpt-oss (Ollama)
@@ -93,7 +93,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Fundação — contrato e leitura | 0/2 | Not started | - |
-| 2. Baselines tradicionais | 1/2 | In Progress | - |
+| 2. Baselines tradicionais | 2/2 | Complete | 2026-06-16 |
 | 3. Runner gpt-oss (Ollama) | 0/2 | Not started | - |
 | 4. Agregador e relatório | 0/2 | Not started | - |
 | 5. Base nova e generalização | 0/2 | Not started | - |
