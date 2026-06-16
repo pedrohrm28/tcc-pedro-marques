@@ -25,8 +25,8 @@ Do contrato de dados ao relatório final: primeiro fixamos o formato `.jsonl` co
 **Plans**: 2 plans
 
 Plans:
-- [ ] 01-01: Loaders de corpora (GMB IOB + CoNLL-U UPOS) e seleção dos subconjuntos (150 / 1167 sentenças)
-- [ ] 01-02: Schema `.jsonl` do contrato comum + helpers de leitura/escrita + estrutura de pastas `resultados/`
+- [x] 01-01: Loaders de corpora (GMB IOB + CoNLL-U UPOS) e seleção dos subconjuntos (150 / 1167 sentenças)
+- [x] 01-02: Schema `.jsonl` do contrato comum + helpers de leitura/escrita + estrutura de pastas `resultados/`
 
 ### Phase 2: Baselines tradicionais
 **Goal**: Implementar os dois modelos de referência rodando via código e emitindo o contrato comum.

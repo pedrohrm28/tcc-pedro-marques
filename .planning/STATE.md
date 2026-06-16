@@ -1,3 +1,17 @@
+---
+gsd_state_version: 1.0
+milestone: v1.0
+milestone_name: milestone
+status: unknown
+last_updated: "2026-06-16T14:09:37.615Z"
+progress:
+  total_phases: 5
+  completed_phases: 1
+  total_plans: 2
+  completed_plans: 2
+  percent: 100
+---
+
 # Project State
 
 ## Project Reference
@@ -5,7 +19,7 @@
 See: .planning/PROJECT.md (updated 2026-06-16)
 
 **Core value:** Tabela comparativa única e defensável (precisão/cobertura/F1) dos 4 modelos sobre as mesmas sentenças, reprodutível.
-**Current focus:** Phase 1 — Fundação (contrato `.jsonl` + loaders de corpora)
+**Current focus:** Phase 01 — funda-o-contrato-e-leitura-de-corpora
 
 ## Status
 
