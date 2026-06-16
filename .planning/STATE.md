@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: phase-planned
-last_updated: "2026-06-16T15:02:09.634Z"
+status: Executing Phase 02
+last_updated: "2026-06-16T15:04:14.252Z"
 progress:
   total_phases: 5
   completed_phases: 1
   total_plans: 4
-  completed_plans: 2
-  percent: 50
+  completed_plans: 3
+  percent: 75
 ---
 
 # Project State
@@ -19,14 +19,15 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-16)
 
 **Core value:** Tabela comparativa única e defensável (precisão/cobertura/F1) dos 4 modelos sobre as mesmas sentenças, reprodutível.
-**Current focus:** Phase 2 planejada (run_crf + run_regras) — pronta para executar
+**Current focus:** Phase 02 — baselines-tradicionais
 
 ## Status
 
 - **Initialized:** 2026-06-16
 - **Granularity:** coarse · **Workflow:** light (sem research/plan-check, com verifier)
 - **Phases:** 5 (ver ROADMAP.md)
-- **Next action:** `/gsd-execute-phase 2`
+- **Next action:** executar `02-01` (run_crf) — único plano restante da Fase 2
+- **Last session:** Completed 02-02-PLAN.md (run_regras: UPOS por regras, 27604 tokens alinhados)
 
 ## Decisions Log
 
