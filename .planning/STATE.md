@@ -26,8 +26,8 @@ See: .planning/PROJECT.md (updated 2026-06-16)
 - **Initialized:** 2026-06-16
 - **Granularity:** coarse · **Workflow:** light (sem research/plan-check, com verifier)
 - **Phases:** 5 (ver ROADMAP.md)
-- **Next action:** Fase 2 completa (02-01 + 02-02) — `/gsd-verify-work 2` e planejar Fase 3 (runner gpt-oss)
-- **Last session:** Completed 02-01-PLAN.md (run_crf: CRF NER, 25857 tokens alinhados, modelo cacheado)
+- **Next action:** Fase 2 verificada (PASS 3/3) — planejar Fase 3 (runner gpt-oss): `/gsd-plan-phase 3`
+- **Last session:** Fase 2 completa e verificada — 02-01 (CRF NER, 25857 tokens) + 02-02 (regras UPOS, 27604 tokens), ambos alinhados ao gold, sem vazamento treino/teste
 
 ## Decisions Log
 
