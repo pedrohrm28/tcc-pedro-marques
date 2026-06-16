@@ -2,8 +2,8 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: unknown
-last_updated: "2026-06-16T14:09:37.615Z"
+status: phase-complete
+last_updated: "2026-06-16T14:30:34.471Z"
 progress:
   total_phases: 5
   completed_phases: 1
@@ -19,14 +19,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-16)
 
 **Core value:** Tabela comparativa única e defensável (precisão/cobertura/F1) dos 4 modelos sobre as mesmas sentenças, reprodutível.
-**Current focus:** Phase 01 — funda-o-contrato-e-leitura-de-corpora
+**Current focus:** Phase 1 complete — próximo: Phase 2
 
 ## Status
 
 - **Initialized:** 2026-06-16
 - **Granularity:** coarse · **Workflow:** light (sem research/plan-check, com verifier)
 - **Phases:** 5 (ver ROADMAP.md)
-- **Next action:** `/gsd-plan-phase 1`
+- **Next action:** `/gsd-plan-phase 2`
 
 ## Decisions Log
 
