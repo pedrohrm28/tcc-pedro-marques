@@ -36,7 +36,7 @@ Plans:
   1. `run_crf.py` treina o CRF a partir das features do `ner.csv`, persiste o modelo e prediz sobre o teste GMB, gerando `.jsonl`.
   2. `run_regras.py` produz a anotação UPOS por regras sobre o Bosque e gera `.jsonl`.
   3. Re-rodar o agregador não exige re-treinar o CRF (modelo em disco).
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
 - [ ] 02-01: `run_crf.py` — treino + predição NER (sklearn-crfsuite, features do ner.csv)
