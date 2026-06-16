@@ -6,8 +6,8 @@ pt_bosque-ud-*.conllu -> sentenças de (token, UPOS) para POS (português).
 Uso típico:
     from src.io.corpora import carregar_gmb, carregar_conllu, Sentenca
 
-    # NER: subconjunto de 150 sentenças
-    sentencas_ner = carregar_gmb(limite=150)
+    # NER: subconjunto de 1167 sentenças (alinhado ao N do POS; ver Decisions Log)
+    sentencas_ner = carregar_gmb(limite=1167)
 
     # POS: todas as 1167 sentenças do arquivo de teste
     sentencas_pos = carregar_conllu(limite=1167)
@@ -42,7 +42,7 @@ def carregar_gmb(
         caminho: Caminho para o arquivo GMB_dataset.txt (encoding latin-1).
         limite:  Número máximo de sentenças a retornar (first-N em ordem estável).
                  None = todas (2999 sentenças no dataset completo).
-                 Para NER, usar limite=150.
+                 Para NER, usar limite=1167 (alinhado ao N do POS; ver Decisions Log).
 
     Returns:
         Lista de Sentenca com sentenca_id = valor da coluna 'Sentence #' (ex '1.0').

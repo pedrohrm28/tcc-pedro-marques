@@ -34,6 +34,7 @@ See: .planning/PROJECT.md (updated 2026-06-16)
 - Re-rodar os 4 modelos no mesmo pipeline (não reaproveitar números do TCC I).
 - NER = GMB (inglês); POS = Bosque (português) — herdado do TCC I.
 - `GMB_dataset.txt` = gold de NER; `ner.csv` = input de features do CRF.
+- **NER usa 1167 sentenças** (= N do POS/Bosque), não as 150 do TCC I. Decisão (2026-06-16): priorizar robustez estatística sobre comparabilidade 1:1; apresentar como evolução do TCC I. GMB tem 2999 disponíveis; `limite` é parâmetro do loader, sem mudança de código na Fase 1. Impacto: ~7,8× mais chamadas de LLM nas Fases 3-4.
 
 ## Notes
 
