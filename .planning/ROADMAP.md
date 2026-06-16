@@ -6,8 +6,8 @@ Do contrato de dados ao relatório final: primeiro fixamos o formato `.jsonl` co
 
 ## Phases
 
-- [ ] **Phase 1: Fundação — contrato e leitura de corpora** - Formato `.jsonl` comum, loaders de GMB/CoNLL-U, scaffolding do projeto
-- [ ] **Phase 2: Baselines tradicionais** - CRF (NER) treinado do `ner.csv` + modelo de regras (POS) sobre o Bosque
+- [x] **Phase 1: Fundação — contrato e leitura de corpora** - Formato `.jsonl` comum, loaders de GMB/CoNLL-U, scaffolding do projeto
+- [x] **Phase 2: Baselines tradicionais** - CRF (NER) treinado do `ner.csv` + modelo de regras (POS) sobre o Bosque
 - [ ] **Phase 3: Runner gpt-oss (Ollama)** - Inferência reprodutível dos LLMs 20B/120B em NER e UPOS
 - [ ] **Phase 4: Agregador e relatório** - Métricas alinhadas ao gold, tabela comparativa dos 4 modelos + CSV de discrepâncias
 - [ ] **Phase 5: Base nova e generalização** - Gerar sentenças fora de domínio e rodar os 4 modelos nelas
@@ -92,7 +92,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Fundação — contrato e leitura | 0/2 | Not started | - |
+| 1. Fundação — contrato e leitura | 2/2 | Complete | 2026-06-16 |
 | 2. Baselines tradicionais | 2/2 | Complete | 2026-06-16 |
 | 3. Runner gpt-oss (Ollama) | 0/2 | Not started | - |
 | 4. Agregador e relatório | 0/2 | Not started | - |

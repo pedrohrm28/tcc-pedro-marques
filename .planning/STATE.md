@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Executing Phase 02
+status: phase-complete
 last_updated: "2026-06-16T15:04:14.252Z"
 progress:
   total_phases: 5
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 4
-  completed_plans: 3
-  percent: 75
+  completed_plans: 4
+  percent: 100
 ---
 
 # Project State
@@ -19,7 +19,7 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-16)
 
 **Core value:** Tabela comparativa única e defensável (precisão/cobertura/F1) dos 4 modelos sobre as mesmas sentenças, reprodutível.
-**Current focus:** Phase 02 — baselines-tradicionais
+**Current focus:** Fase 2 completa (CRF NER + regras UPOS) — pronta para verify/Fase 3
 
 ## Status
 
