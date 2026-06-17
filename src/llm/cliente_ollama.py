@@ -19,6 +19,17 @@ import requests
 # ---------------------------------------------------------------------------
 OLLAMA_URL: str = "http://localhost:11434/api/generate"
 
+# Schema de saída estruturada (Ollama structured outputs).
+# Forçar `format="json"` puro fazia cada modelo inventar um schema diferente
+# (qwen: {"tokens":[[tok,tag],...]}, llama3.2: {tag:tok invertido}, llama3.1: só 1 token),
+# quebrando o parser e zerando os resultados. Um schema explícito (objeto com `tags` =
+# array de strings) faz os 3 modelos devolverem o MESMO formato correto. (Fix gap 03.)
+FORMATO_TAGS: dict = {
+    "type": "object",
+    "properties": {"tags": {"type": "array", "items": {"type": "string"}}},
+    "required": ["tags"],
+}
+
 
 # ---------------------------------------------------------------------------
 # Dataclass de resposta (inclui métricas do Ollama para tok/s)
@@ -87,7 +98,7 @@ def gerar(
         "model": modelo,
         "prompt": prompt,
         "stream": False,
-        "format": "json",
+        "format": FORMATO_TAGS,  # schema estruturado: {"tags": [str, ...]} (fix gap 03)
         "keep_alive": -1,
         "options": options,
     }

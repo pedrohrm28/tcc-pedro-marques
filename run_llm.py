@@ -145,7 +145,12 @@ def rodar(
 
         tokens_s = [tok for tok, _ in s.pares]
         prompt = montar_prompt(tarefa, tokens_s)
-        resp = fn_gerar(modelo, prompt, num_predict)
+        # Teto de tokens por chamada: se não especificado, derivar do nº de tokens.
+        # Cada token gera ~poucos tokens de saída (tag curta + pontuação JSON); ~6/token
+        # + folga de 32 cobre respostas legítimas e CORTA o loop patológico que, com
+        # format=json sem teto, gerava milhares de tokens e estourava o timeout (fix gap 03).
+        np_efetivo = num_predict if num_predict is not None else (len(tokens_s) * 6 + 32)
+        resp = fn_gerar(modelo, prompt, np_efetivo)
         tags, n_fb = alinhar_tags(tarefa, tokens_s, resp.texto)
 
         # Asserção defensiva: o parser garante; se falhar é bug.

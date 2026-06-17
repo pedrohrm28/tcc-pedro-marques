@@ -33,8 +33,19 @@ com o gold. Integridade dos dados > velocidade. LOCKED.
 
 ### D-03: Saída em JSON estruturado
 O prompt pede ao LLM um **array JSON de tags** (uma por token, na ordem dos tokens da sentença).
-Usar `format=json` do Ollama (`/api/generate` ou `/api/chat`). O parser valida que o comprimento
-do array == nº de tokens da sentença; se não bater, aciona o fallback (D-04). LOCKED.
+O parser valida que o comprimento do array == nº de tokens da sentença; se não bater, aciona o fallback (D-04). LOCKED.
+
+**FIX gap 03 (2026-06-17):** `format="json"` puro NÃO funcionou — cada modelo inventou um schema
+diferente (qwen: `{"tokens":[[tok,tag],...]}`; llama3.2: `{tag:tok}` invertido; llama3.1: só 1 token),
+zerando os resultados (fallback total). Correção: usar **structured outputs** do Ollama — `format` é
+um **JSON Schema** (`{"tags": [array de strings]}`, ver `FORMATO_TAGS` em cliente_ollama.py). Com o
+schema, os 3 modelos devolvem o MESMO formato correto. O parser extrai `dados["tags"]` e `normaliza_item`
+tolera string, par `[tok,tag]` e dict `{"tag":...}`.
+
+### D-03b: num_predict default proporcional (anti-loop/timeout)
+**FIX gap 03 (2026-06-17):** sem teto de `num_predict`, modelos pequenos entravam em loop de geração
+(format json) e estouravam o timeout de 600s numa única sentença. O runner agora deriva um teto padrão
+`len(tokens)*6 + 32` quando `--num-predict` não é dado — corta o loop sem truncar respostas legítimas.
 - O run_llm DEVE fornecer ao LLM a lista de tokens já tokenizada (vinda do loader), não pedir que
   o LLM re-tokenize — isso preserva o alinhamento.
 - NER: tags IOB (ex "O", "B-geo", "I-per"). UPOS: as 17 UPOS válidas (mesmo conjunto do `run_regras.py`).
@@ -44,6 +55,14 @@ Quando a resposta do LLM não alinha (array com tamanho errado, JSON inválido, 
 preencher o token problemático com tag de fallback: **NER → "O"**, **UPOS → "NOUN"** (tag mais
 frequente). Marcar internamente quantos tokens caíram em fallback por (modelo, tarefa) — isso vira
 **métrica de robustez** no relatório da Fase 4. O `.jsonl` NUNCA é emitido desalinhado. LOCKED.
+
+**Política de fallback CONFIRMADA (2026-06-17):** os 3B erram a CONTAGEM de tags em ~50% das sentenças
+longas (devolvem array com tamanho ≠ nº de tokens) → a sentença inteira vira fallback. Decisão: **manter
+o fallback como resultado honesto** — conta como erro do modelo, mede a robustez real do LLM pequeno em
+hardware modesto (achado legítimo do TCC). NÃO usar retry nem alinhamento parcial (rejeitados: retry
+era deferred; alinhamento parcial contraria a integridade D-02). A taxa de fallback por modelo é reportada
+pelo agregador (Fase 4). No smoke de 10 sentenças do qwen2.5:3b NER: ~50% das sentenças em fallback,
+mas as que alinham produzem tags válidas e plausíveis (B-geo, B-org, B-per...).
 
 ### D-05: Reprodutibilidade
 `temperature=0` e `seed=42` em toda chamada (options do Ollama). Prompts versionados (texto do

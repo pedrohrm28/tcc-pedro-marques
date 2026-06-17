@@ -175,3 +175,64 @@ def test_fallback_constante_ner_e_upos():
     """FALLBACK dict tem entradas 'ner' e 'upos' com valores corretos."""
     assert FALLBACK["ner"] == "O"
     assert FALLBACK["upos"] == "NOUN"
+
+
+# ---------------------------------------------------------------------------
+# Regressão gap 03: formatos reais que os modelos devolvem com structured output
+# ---------------------------------------------------------------------------
+
+def test_normaliza_item_string():
+    """Item que já é string -> a própria string."""
+    from src.llm.parser import normaliza_item
+    assert normaliza_item("B-geo") == "B-geo"
+
+
+def test_normaliza_item_par_token_tag():
+    """Item [token, tag] (qwen às vezes devolve pares) -> extrai a tag (último elemento)."""
+    from src.llm.parser import normaliza_item
+    assert normaliza_item(["Thousands", "O"]) == "O"
+
+
+def test_normaliza_item_dict_tag():
+    """Item {"word":..., "tag":...} -> extrai a chave 'tag'."""
+    from src.llm.parser import normaliza_item
+    assert normaliza_item({"word": "London", "tag": "B-geo"}) == "B-geo"
+
+
+def test_alinhar_tags_a_partir_de_pares():
+    """alinhar_tags lida com array de pares [tok,tag] (formato observado do qwen)."""
+    tokens = ["London", "is", "big"]
+    crua = '{"tags": [["London","B-geo"],["is","O"],["big","O"]]}'
+    tags, n_fb = alinhar_tags("ner", tokens, crua)
+    assert tags == ["B-geo", "O", "O"]
+    assert n_fb == 0
+
+
+def test_cliente_usa_schema_estruturado_nao_json_puro():
+    """O corpo enviado ao Ollama usa format=schema (objeto), não a string 'json' (fix gap 03)."""
+    import src.llm.cliente_ollama as co
+
+    capturado = {}
+
+    class _Resp:
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return {"response": '{"tags": ["O"]}', "eval_count": 1,
+                    "eval_duration": 1, "load_duration": 0, "total_duration": 1}
+
+    def _fake_post(url, json=None, timeout=None):
+        capturado["corpo"] = json
+        return _Resp()
+
+    orig = co.requests.post
+    co.requests.post = _fake_post
+    try:
+        co.gerar("qwen2.5:3b", "prompt", num_predict=10)
+    finally:
+        co.requests.post = orig
+
+    fmt = capturado["corpo"]["format"]
+    assert isinstance(fmt, dict), "format deve ser um schema (dict), não a string 'json'"
+    assert fmt["properties"]["tags"]["type"] == "array"

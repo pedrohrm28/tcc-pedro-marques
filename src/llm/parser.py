@@ -26,17 +26,23 @@ FALLBACK: dict[str, str] = {
 def extrair_array(resposta_crua: str) -> list | None:
     """Tenta extrair um array de tags da resposta JSON do LLM.
 
-    Lógica:
+    Lógica (ordem de prioridade):
     - Faz json.loads na resposta crua.
-    - Se o resultado for uma lista, retorna-a diretamente.
-    - Se for um dict, retorna a primeira lista encontrada nos valores.
+    - Se for uma lista, retorna-a diretamente.
+    - Se for um dict com a chave "tags" cujo valor é lista, retorna dados["tags"]
+      (formato garantido pelo schema estruturado FORMATO_TAGS — fix gap 03).
+    - Senão, se for dict, retorna a primeira lista encontrada nos valores (fallback legado).
     - Se json.loads falhar ou não houver lista, retorna None.
+
+    Cada elemento da lista pode ser uma string (tag) OU um par [token, tag]/[tag, token]:
+    nesse caso, normaliza_item (chamado por alinhar_tags) extrai a tag. Aqui só devolvemos
+    a lista bruta.
 
     Args:
         resposta_crua: string retornada pelo campo "response" do Ollama.
 
     Returns:
-        Lista de tags, ou None se não for possível extrair.
+        Lista de tags (ou de itens normalizáveis), ou None se não for possível extrair.
     """
     try:
         dados = json.loads(resposta_crua)
@@ -47,12 +53,43 @@ def extrair_array(resposta_crua: str) -> list | None:
         return dados
 
     if isinstance(dados, dict):
-        # Retorna a primeira lista encontrada nos valores do dicionário.
+        # Caminho preferencial: chave "tags" do schema estruturado.
+        tags = dados.get("tags")
+        if isinstance(tags, list):
+            return tags
+        # Fallback legado: primeira lista encontrada nos valores do dicionário.
         for valor in dados.values():
             if isinstance(valor, list):
                 return valor
         return None
 
+    return None
+
+
+def normaliza_item(item) -> str | None:
+    """Extrai a tag (string) de um item do array, tolerando formatos comuns dos modelos.
+
+    Casos:
+    - string -> a própria string.
+    - par [token, tag] ou [tag] (lista/tupla): assume que a TAG é o último elemento string.
+      (qwen às vezes devolve [["Thousands","O"], ...] mesmo com schema; pegamos o "O".)
+    - dict {"tag": "O", ...} ou {"word":..., "tag":...}: pega a chave "tag".
+    - qualquer outra coisa -> None (vira fallback em alinhar_tags).
+
+    Args:
+        item: elemento do array retornado por extrair_array.
+
+    Returns:
+        A tag como string, ou None se não for extraível.
+    """
+    if isinstance(item, str):
+        return item
+    if isinstance(item, (list, tuple)) and item:
+        ultimo = item[-1]
+        return ultimo if isinstance(ultimo, str) else None
+    if isinstance(item, dict):
+        t = item.get("tag")
+        return t if isinstance(t, str) else None
     return None
 
 
@@ -122,12 +159,13 @@ def alinhar_tags(
     if arr is None or len(arr) != n_tokens:
         return [fallback] * n_tokens, n_tokens
 
-    # Validar token a token.
+    # Validar token a token (normalizando cada item para extrair a tag).
     tags: list[str] = []
     n_fallback = 0
     for i in range(n_tokens):
-        if tag_valida(tarefa, arr[i]):
-            tags.append(arr[i])
+        tag = normaliza_item(arr[i])
+        if tag is not None and tag_valida(tarefa, tag):
+            tags.append(tag)
         else:
             tags.append(fallback)
             n_fallback += 1
