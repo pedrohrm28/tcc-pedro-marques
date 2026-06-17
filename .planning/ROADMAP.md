@@ -64,18 +64,21 @@ Plans:
 - [x] 03-02-PLAN.md — run_llm.py CLI: loop 1 sentença/chamada, emissão `.jsonl` incremental + resume, métricas tok/s e sent/s por (modelo,tarefa)
 
 ### Phase 4: Agregador e relatório
-**Goal**: `comparativo_gold.py` lê todos os `.jsonl`, alinha ao gold, calcula métricas e monta a tabela comparativa dos 5 modelos + discrepâncias.
+**Goal**: O agregador (`src/metricas.py` puro + `agregar.py` CLI; o `comparativo_gold.py` legado vira referência, D-01) lê todos os `.jsonl`, alinha ao gold, calcula métricas e monta a tabela comparativa dos 5 modelos + discrepâncias.
 **Depends on**: Phase 2, Phase 3
 **Requirements**: REQ-05, REQ-06
 **Success Criteria** (what must be TRUE):
   1. Calcula precisão, cobertura e F1 por classe, micro, e em nível de entidade (NER/IOB).
   2. Emite uma tabela comparativa única (Markdown/CSV) com os 5 modelos × tarefas, incluindo tempo/velocidade dos LLMs.
   3. Emite CSV de discrepâncias token a token por modelo para análise qualitativa.
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 04-01: Núcleo de métricas (por classe, micro, nível de entidade) reusando o contrato `.jsonl`
-- [ ] 04-02: Agregação multi-modelo → tabela comparativa + CSV de discrepâncias
+**Wave 1**
+- [ ] 04-01-PLAN.md — Núcleo de métricas puro (`src/metricas.py`): `metricas_token` (por classe + micro) copiado do legado + `metricas_entidade` (seqeval) REFATORADO para RETORNAR dados; testes TDD com sequências sintéticas
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [ ] 04-02-PLAN.md — `agregar.py` CLI: alinha `.jsonl` ao gold, emite JSON por (modelo,tarefa) + tabelas MD/CSV por tarefa + CSV de discrepâncias, com degradação graciosa quando faltam os `.jsonl` dos LLMs
 
 ### Phase 5: Base nova e generalização
 **Goal**: Gerar a base nova (fora de domínio) e rodar os 5 modelos nela, reusando todo o pipeline.
@@ -104,4 +107,3 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 3. Runner LLM (3 LLMs, Ollama) | 2/2 | Complete | 2026-06-17 |
 | 4. Agregador e relatório | 0/2 | Not started | - |
 | 5. Base nova e generalização | 0/2 | Not started | - |
-</content>
