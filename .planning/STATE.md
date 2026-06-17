@@ -2,11 +2,11 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Executing Phase 04
+status: phase-complete
 last_updated: "2026-06-17T17:25:00.000Z"
 progress:
   total_phases: 5
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 8
   completed_plans: 8
   percent: 100
@@ -18,15 +18,15 @@ progress:
 
 See: .planning/PROJECT.md (updated 2026-06-16)
 
-**Core value:** Tabela comparativa única e defensável (precisão/cobertura/F1) dos 4 modelos sobre as mesmas sentenças, reprodutível.
-**Current focus:** Phase 04 — agregador-e-relatorio
+**Core value:** Tabela comparativa única e defensável (precisão/cobertura/F1) dos 5 modelos sobre as mesmas sentenças, reprodutível.
+**Current focus:** Fase 4 completa e verificada (PASS 3/3). Pendente: rodar os 3 LLMs (Fase 3) p/ tabela completa; depois Fase 5 (base nova).
 
 ## Status
 
 - **Initialized:** 2026-06-16
 - **Granularity:** coarse · **Workflow:** light (sem research/plan-check, com verifier)
 - **Phases:** 5 (ver ROADMAP.md)
-- **Next action:** verificar Fase 04; rodar os 3 LLMs da Fase 3 para gerar os 6 .jsonl ausentes e re-rodar `python agregar.py` p/ tabela completa. Fase 5 (base nova) pendente de dados.
+- **Next action:** Fase 4 verificada (PASS 3/3). Rodar os 3 LLMs da Fase 3 (`python run_llm.py --modelo ... --tarefa ...`, 6 execuções) para gerar os .jsonl ausentes e re-rodar `python agregar.py` p/ tabela completa dos 5 modelos. Depois: `/gsd-plan-phase 5` (base nova).
 - **Last session:** 2026-06-17 — Plano 04-02 completo (agregar.py: CLI que alinha .jsonl ao gold, calcula métricas via src/metricas.py, emite JSON D-02 + tabelas NER/UPOS MD/CSV + discrepancias.csv; degradação graciosa D-06 e asserção D-05). 17 testes sintéticos passam. Rodada real parcial: CRF NER micro-F1 0.969/entidade-F1 0.776; regras UPOS micro-F1 0.878; 8 LLMs reportados ausentes sem quebrar. Commits: cad2154 (Task 1), a24d275 (Task 2).
 
 ## Decisions Log
