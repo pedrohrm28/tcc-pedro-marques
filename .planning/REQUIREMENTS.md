@@ -9,14 +9,14 @@ v1: Pipeline reprodutível que roda 5 modelos (CRF, regras, llama3.1:8b, qwen2.5
 ## Table Stakes
 
 - **REQ-01 — Contrato de saída comum**: formato `.jsonl` único que todo script de modelo emite (uma linha por token: `{tarefa, modelo, sentenca_id, posicao, token, tag_predita}`). É o que desacopla os modelos do agregador.
-- **REQ-05 — Agregador de métricas**: lê os `.jsonl` + gold, alinha token a token, calcula precisão/cobertura/F1 por classe, micro, e em nível de entidade (NER, esquema IOB). Saída em JSON.
+- **REQ-05 — Agregador de métricas** ✅ (04-02): `agregar.py` lê os `.jsonl` + gold, alinha token a token por (sentenca_id, posicao), calcula precisão/cobertura/F1 por classe, micro, e em nível de entidade (NER, esquema IOB) via `src/metricas.py`. Saída em JSON por (modelo,tarefa).
 
 ## Features
 
 - **REQ-02 — Baseline CRF (NER)** ✅ (02-01): `run_crf.py` treina o CRF a partir das features do `ner.csv`, prediz sobre o conjunto de teste GMB (1167 sentenças — alinhado ao N do POS; evolução sobre as 150 do TCC I), emite `.jsonl` no contrato comum. Modelo treinado persistido em disco para evitar re-treino.
 - **REQ-03 — Baseline baseado em regras (POS/UPOS)** ✅ (02-02): `run_regras.py` aplica a anotação por regras sobre o subconjunto Bosque (`.conllu`), emite UPOS no contrato comum.
 - **REQ-04 — Runner LLM**: `run_llm.py --modelo <llama3.1:8b|qwen2.5:3b|llama3.2:3b> --tarefa ner|upos`, via Ollama, com `temperature=0`/`seed=42`, **1 sentença por chamada** (sem batching, para preservar alinhamento), parsing robusto da saída do LLM de volta para o contrato comum. `--modelo` parametrizável: o mesmo script roda os 3 LLMs. Registrar tempo/velocidade por modelo (eixo de comparação).
-- **REQ-06 — Saída final**: tabela comparativa dos 5 modelos lado a lado (Markdown/CSV), incluindo tempo/velocidade dos LLMs, + CSV de discrepâncias token a token para análise qualitativa.
+- **REQ-06 — Saída final** ✅ (04-02): tabela comparativa por tarefa dos modelos presentes lado a lado (Markdown E CSV: `tabela_ner.{md,csv}`/`tabela_upos.{md,csv}`), incluindo tempo/velocidade dos LLMs (do `.meta.json`; "—" p/ CRF/regras), + `discrepancias.csv` token a token por modelo para análise qualitativa. Degradação graciosa quando faltam os `.jsonl` dos LLMs.
 - **REQ-07 — Base nova**: gerar sentenças inéditas fora de domínio (NER inglês + POS português), rodar os 5 modelos, agregar — cenário de generalização.
 
 ## Out of Scope

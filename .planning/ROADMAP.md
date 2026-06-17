@@ -11,7 +11,7 @@ Do contrato de dados ao relatório final: primeiro fixamos o formato `.jsonl` co
 - [x] **Phase 1: Fundação — contrato e leitura de corpora** - Formato `.jsonl` comum, loaders de GMB/CoNLL-U, scaffolding do projeto
 - [x] **Phase 2: Baselines tradicionais** - CRF (NER) treinado do `ner.csv` + modelo de regras (POS) sobre o Bosque
 - [x] **Phase 3: Runner LLM (Ollama)** - Inferência reprodutível dos 3 LLMs (llama3.1:8b, qwen2.5:3b, llama3.2:3b) em NER e UPOS
-- [ ] **Phase 4: Agregador e relatório** - Métricas alinhadas ao gold, tabela comparativa dos 5 modelos + CSV de discrepâncias
+- [x] **Phase 4: Agregador e relatório** - Métricas alinhadas ao gold, tabela comparativa dos 5 modelos + CSV de discrepâncias
 - [ ] **Phase 5: Base nova e generalização** - Gerar sentenças fora de domínio e rodar os 5 modelos nelas
 
 ## Phase Details
@@ -78,7 +78,7 @@ Plans:
 - [x] 04-01-PLAN.md — Núcleo de métricas puro (`src/metricas.py`): `metricas_token` (por classe + micro) copiado do legado + `metricas_entidade` (seqeval) REFATORADO para RETORNAR dados; testes TDD com sequências sintéticas
 
 **Wave 2** *(blocked on Wave 1 completion)*
-- [ ] 04-02-PLAN.md — `agregar.py` CLI: alinha `.jsonl` ao gold, emite JSON por (modelo,tarefa) + tabelas MD/CSV por tarefa + CSV de discrepâncias, com degradação graciosa quando faltam os `.jsonl` dos LLMs
+- [x] 04-02-PLAN.md — `agregar.py` CLI: alinha `.jsonl` ao gold, emite JSON por (modelo,tarefa) + tabelas MD/CSV por tarefa + CSV de discrepâncias, com degradação graciosa quando faltam os `.jsonl` dos LLMs
 
 ### Phase 5: Base nova e generalização
 **Goal**: Gerar a base nova (fora de domínio) e rodar os 5 modelos nela, reusando todo o pipeline.
@@ -105,5 +105,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 1. Fundação — contrato e leitura | 2/2 | Complete | 2026-06-16 |
 | 2. Baselines tradicionais | 2/2 | Complete | 2026-06-16 |
 | 3. Runner LLM (3 LLMs, Ollama) | 2/2 | Complete | 2026-06-17 |
-| 4. Agregador e relatório | 0/2 | Not started | - |
+| 4. Agregador e relatório | 2/2 | Complete | 2026-06-17 |
 | 5. Base nova e generalização | 0/2 | Not started | - |

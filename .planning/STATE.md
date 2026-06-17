@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: Executing Phase 04
-last_updated: "2026-06-17T17:00:49.000Z"
+last_updated: "2026-06-17T17:25:00.000Z"
 progress:
   total_phases: 5
   completed_phases: 3
   total_plans: 8
-  completed_plans: 7
-  percent: 88
+  completed_plans: 8
+  percent: 100
 ---
 
 # Project State
@@ -26,8 +26,8 @@ See: .planning/PROJECT.md (updated 2026-06-16)
 - **Initialized:** 2026-06-16
 - **Granularity:** coarse · **Workflow:** light (sem research/plan-check, com verifier)
 - **Phases:** 5 (ver ROADMAP.md)
-- **Next action:** executar plano 04-02 (CLI agregador — lê .jsonl, monta JSON de métricas + tabelas MD/CSV + CSV de discrepâncias).
-- **Last session:** 2026-06-17 — Plano 04-01 completo (src/metricas.py: metricas_token copiado do legado + metricas_entidade refatorado de print->return via seqeval). 8 testes sintéticos passam. Commits: f51177d/0cd9821 (Task 1 test/feat), 9dcc76a/675623b (Task 2 test/feat).
+- **Next action:** verificar Fase 04; rodar os 3 LLMs da Fase 3 para gerar os 6 .jsonl ausentes e re-rodar `python agregar.py` p/ tabela completa. Fase 5 (base nova) pendente de dados.
+- **Last session:** 2026-06-17 — Plano 04-02 completo (agregar.py: CLI que alinha .jsonl ao gold, calcula métricas via src/metricas.py, emite JSON D-02 + tabelas NER/UPOS MD/CSV + discrepancias.csv; degradação graciosa D-06 e asserção D-05). 17 testes sintéticos passam. Rodada real parcial: CRF NER micro-F1 0.969/entidade-F1 0.776; regras UPOS micro-F1 0.878; 8 LLMs reportados ausentes sem quebrar. Commits: cad2154 (Task 1), a24d275 (Task 2).
 
 ## Decisions Log
 
@@ -42,6 +42,7 @@ See: .planning/PROJECT.md (updated 2026-06-16)
 - **03-01 (núcleo LLM, 2026-06-17):** UPOS_VALIDOS importado de run_regras (não redefinido no módulo llm) — evita divergência de esquema. extrair_array aceita dict{'tags':[...]} ou lista direta. Fallback total quando len(arr)!=len(tokens). INSTRUCAO_NER em inglês (GMB), INSTRUCAO_UPOS em português (Bosque).
 - **03-02 (runner CLI, 2026-06-17):** fn_gerar injetável no rodar() para mock sem rede. Escrita modo 'a' direto (não escrever_jsonl 'w'). modelo preserva ':' no Registro; caminho sanitiza via caminho_resultado. meta.json com tok/s, sent/s, fallbacks por (modelo, tarefa).
 - **04-01 (núcleo de métricas, 2026-06-17):** src/metricas.py puro (sem print/I/O/rede). metricas_token copiado verbatim do comparativo_gold.py (l.149-170): retorna (linhas, micro), suporte=tp+fn, div-zero->0.0. metricas_entidade REFATORADO de print (legado l.181-185) para RETORNAR dict {precisao,cobertura,f1,por_tipo} via seqeval; import lazy + RuntimeError claro se seqeval ausente; por_tipo filtra micro/macro/weighted avg + accuracy. alinhar copiado como referência. seqeval instalado no ambiente (Regra 3).
+- **04-02 (CLI agregador, 2026-06-17):** agregar.py reusa src/metricas.py (não reimplementa). Alinhamento por (sentenca_id, posicao) com índice dict; tags ausentes -> "X-AUSENTE". D-05: alinhar_predicao levanta RuntimeError se nº de registros != tokens do gold (no CLI é por-modelo, capturado em resumo['erros'], não derruba os demais). D-06: descobrir_presentes separa presentes/ausentes, nunca levanta por ausência. _json_seguro coage escalares numpy do seqeval (float64/int32) p/ nativos antes do json.dump (Regra 1 - bug). Tabelas NER (com f1_entidade) e UPOS (sem) sempre escritas; tempo/tok_s = "—" p/ crf/regras (sem .meta.json).
 
 ## Notes
 
