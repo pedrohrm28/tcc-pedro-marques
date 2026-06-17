@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Ready to execute
-last_updated: "2026-06-17T15:20:11.771Z"
+status: Executing Phase 03
+last_updated: "2026-06-17T15:29:00Z"
 progress:
   total_phases: 5
   completed_phases: 2
   total_plans: 6
-  completed_plans: 4
-  percent: 67
+  completed_plans: 5
+  percent: 75
 ---
 
 # Project State
@@ -19,15 +19,15 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-16)
 
 **Core value:** Tabela comparativa única e defensável (precisão/cobertura/F1) dos 4 modelos sobre as mesmas sentenças, reprodutível.
-**Current focus:** Fase 2 completa (CRF NER + regras UPOS) — pronta para verify/Fase 3
+**Current focus:** Phase 03 — runner-llm-ollama
 
 ## Status
 
 - **Initialized:** 2026-06-16
 - **Granularity:** coarse · **Workflow:** light (sem research/plan-check, com verifier)
 - **Phases:** 5 (ver ROADMAP.md)
-- **Next action:** planejar Fase 3 (runner dos 3 LLMs): `/gsd-plan-phase 3`. Pré-requisitos JÁ atendidos: Ollama instalado, os 3 modelos baixados (`llama3.1:8b`, `qwen2.5:3b`, `llama3.2:3b`).
-- **Last session:** Fase 2 verificada (PASS 3/3). Infra da Fase 3 preparada: Ollama 0.30.6 instalado, 3 LLMs baixados e testados. Decidido: 5 modelos (CRF + regras + 3 LLMs), 1 sentença/chamada.
+- **Next action:** executar plano 03-02 (run_llm.py CLI: loop 1 sentença/chamada, emissão .jsonl incremental + resume, métricas tok/s).
+- **Last session:** 2026-06-17 — Plano 03-01 completo (parser + prompts + cliente Ollama). 33 testes passam sem rede. Commits: ee52969 (Task 1), 348e120 (Task 2).
 
 ## Decisions Log
 
@@ -39,6 +39,7 @@ See: .planning/PROJECT.md (updated 2026-06-16)
 - `GMB_dataset.txt` = gold de NER; `ner.csv` = input de features do CRF.
 - **NER usa 1167 sentenças** (= N do POS/Bosque), não as 150 do TCC I. Decisão (2026-06-16): priorizar robustez estatística sobre comparabilidade 1:1; apresentar como evolução do TCC I. GMB tem 2999 disponíveis; `limite` é parâmetro do loader, sem mudança de código na Fase 1. Impacto: ~7,8× mais chamadas de LLM nas Fases 3-4.
 - **CRF (02-01):** split explícito sem vazamento — teste = `carregar_gmb(limite=1167)`, treino = ids GMB 1168..2999 (1832 sentenças). ner.csv saneado na leitura (filtro de `sentence_idx` não-numérico + dedupe da duplicação de tokens). Modelo cacheado em `modelos/crf_ner.pkl` (gitignored), `--retrain` força re-treino.
+- **03-01 (núcleo LLM, 2026-06-17):** UPOS_VALIDOS importado de run_regras (não redefinido no módulo llm) — evita divergência de esquema. extrair_array aceita dict{'tags':[...]} ou lista direta. Fallback total quando len(arr)!=len(tokens). INSTRUCAO_NER em inglês (GMB), INSTRUCAO_UPOS em português (Bosque).
 
 ## Notes
 

@@ -58,7 +58,7 @@ Plans:
 
 Plans:
 **Wave 1**
-- [ ] 03-01-PLAN.md — Núcleo puro/mockável: prompts versionados (NER IOB + UPOS) + cliente Ollama reprodutível (temperature=0/seed=42/keep_alive=-1/format=json) + parser robusto com fallback rastreável
+- [x] 03-01-PLAN.md — Núcleo puro/mockável: prompts versionados (NER IOB + UPOS) + cliente Ollama reprodutível (temperature=0/seed=42/keep_alive=-1/format=json) + parser robusto com fallback rastreável
 
 **Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 03-02-PLAN.md — run_llm.py CLI: loop 1 sentença/chamada, emissão `.jsonl` incremental + resume, métricas tok/s e sent/s por (modelo,tarefa)
@@ -101,7 +101,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 |-------|----------------|--------|-----------|
 | 1. Fundação — contrato e leitura | 2/2 | Complete | 2026-06-16 |
 | 2. Baselines tradicionais | 2/2 | Complete | 2026-06-16 |
-| 3. Runner LLM (3 LLMs, Ollama) | 0/2 | Not started | - |
+| 3. Runner LLM (3 LLMs, Ollama) | 1/2 | In progress | - |
 | 4. Agregador e relatório | 0/2 | Not started | - |
 | 5. Base nova e generalização | 0/2 | Not started | - |
 </content>
