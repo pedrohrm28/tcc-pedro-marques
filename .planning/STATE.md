@@ -26,14 +26,15 @@ See: .planning/PROJECT.md (updated 2026-06-16)
 - **Initialized:** 2026-06-16
 - **Granularity:** coarse · **Workflow:** light (sem research/plan-check, com verifier)
 - **Phases:** 5 (ver ROADMAP.md)
-- **Next action:** Fase 2 verificada (PASS 3/3) — planejar Fase 3 (runner LLM `llama3.1:8b`): `/gsd-plan-phase 3`. Pré-requisito: `ollama pull llama3.1:8b`.
-- **Last session:** Fase 2 completa e verificada — 02-01 (CRF NER, 25857 tokens) + 02-02 (regras UPOS, 27604 tokens), ambos alinhados ao gold, sem vazamento treino/teste
+- **Next action:** planejar Fase 3 (runner dos 3 LLMs): `/gsd-plan-phase 3`. Pré-requisitos JÁ atendidos: Ollama instalado, os 3 modelos baixados (`llama3.1:8b`, `qwen2.5:3b`, `llama3.2:3b`).
+- **Last session:** Fase 2 verificada (PASS 3/3). Infra da Fase 3 preparada: Ollama 0.30.6 instalado, 3 LLMs baixados e testados. Decidido: 5 modelos (CRF + regras + 3 LLMs), 1 sentença/chamada.
 
 ## Decisions Log
 
 - Arquitetura: scripts separados por modelo + agregador puro (não orquestrador único).
-- Re-rodar os 3 modelos no mesmo pipeline (não reaproveitar números do TCC I).
-- **LLM = `llama3.1:8b` (decisão 2026-06-17):** substitui `gpt-oss:20b`/`gpt-oss:120b`, que não rodam no hardware local (7,8 GB RAM, GTX 1650 4 GB VRAM, ~16 GB disco). Comparação passa de 4 para 3 modelos (CRF + regras + 1 LLM open-source). CLI `run_llm.py` mantém `--modelo` parametrizável.
+- Re-rodar os 5 modelos no mesmo pipeline (não reaproveitar números do TCC I).
+- **LLMs = 3 modelos (decisão 2026-06-17):** `llama3.1:8b` + `qwen2.5:3b` + `llama3.2:3b`, substituindo `gpt-oss:20b`/`gpt-oss:120b` (não rodam no hardware local: 7,8 GB RAM, GTX 1650 4 GB VRAM). Total = **5 modelos** (CRF + regras + 3 LLMs). Os 3 LLMs viram eixo de comparação tamanho/velocidade/qualidade: o 8B roda 58% na CPU (~7,6 tok/s medido), os 3B cabem 100% na GPU (mais rápidos). CLI `run_llm.py --modelo` roda os 3 com o mesmo código.
+- **LLM 1 sentença/chamada (decisão 2026-06-17):** sem batching. Agrupar sentenças no prompt reduziria chamadas mas arrisca o alinhamento token-a-token (contrato `.jsonl` exige 1:1 com o gold). Integridade > velocidade. Otimizações seguras (keep_alive, num_predict, format=json) decididas no plano da Fase 3.
 - NER = GMB (inglês); POS = Bosque (português) — herdado do TCC I.
 - `GMB_dataset.txt` = gold de NER; `ner.csv` = input de features do CRF.
 - **NER usa 1167 sentenças** (= N do POS/Bosque), não as 150 do TCC I. Decisão (2026-06-16): priorizar robustez estatística sobre comparabilidade 1:1; apresentar como evolução do TCC I. GMB tem 2999 disponíveis; `limite` é parâmetro do loader, sem mudança de código na Fase 1. Impacto: ~7,8× mais chamadas de LLM nas Fases 3-4.
@@ -41,5 +42,5 @@ See: .planning/PROJECT.md (updated 2026-06-16)
 
 ## Notes
 
-- Ollama precisa estar no ar com `llama3.1:8b` baixado antes da Fase 3 (`ollama pull llama3.1:8b`, ~4,7 GB). **Trocado de gpt-oss 20b/120b** (não rodam no hardware local: 7,8 GB RAM, GTX 1650 4 GB) em 2026-06-17.
+- Ollama 0.30.6 no ar com os 3 LLMs (✅ baixados e testados 2026-06-17): `llama3.1:8b` (4,9 GB, ~7,6 tok/s, 42% GPU/58% CPU), `llama3.2:3b` (2,0 GB, ~45 tok/s, 80% GPU), `qwen2.5:3b` (1,9 GB, ~59 tok/s, 100% GPU). Os três respondem correto a `temperature=0/seed=42` via API HTTP. Trocados de gpt-oss 20b/120b (não rodam no hardware local). **qwen2.5:3b é ~7,7× mais rápido que o 8B** (cabe 100% na GPU).
 - Base nova (Fase 5) ainda não existe — só `.gitkeep` em `datasets/base_nova/`.
