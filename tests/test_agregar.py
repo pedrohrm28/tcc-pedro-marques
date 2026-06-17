@@ -154,3 +154,155 @@ def test_ler_meta_presente(tmp_path):
     tempo, velocidade = agregar.ler_meta(str(caminho_jsonl))
     assert tempo == 12.5
     assert velocidade == 100.0
+
+
+# ---------------------------------------------------------------------------
+# Task 2 — descoberta, tabelas, discrepâncias, CLI, degradação graciosa
+# ---------------------------------------------------------------------------
+
+
+def test_formatar_num():
+    assert agregar.formatar_num(0.6666) == "0.667"
+    assert agregar.formatar_num(None) == "—"
+
+
+def test_descobrir_presentes_degrada_gracioso(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    from src.io.contrato import caminho_resultado
+
+    # Só cria crf/ner.jsonl.
+    escrever_jsonl(caminho_resultado("base_mapeada", "crf", "ner"), _registros_ner())
+
+    presentes, ausentes = agregar.descobrir_presentes("base_mapeada")
+    assert ("crf", "ner") in presentes
+    assert ("llama3.1:8b", "ner") in ausentes
+    assert ("regras", "upos") in ausentes
+    # 5 modelos x 2 tarefas = 10; 1 presente, 9 ausentes.
+    assert len(presentes) + len(ausentes) == 10
+    assert len(presentes) == 1
+
+
+def test_montar_tabela_ner_tem_f1_entidade():
+    markdown, linhas_csv = agregar.montar_tabela("ner", [])
+    assert "f1_entidade" in linhas_csv[0]
+    assert "f1_entidade" in markdown
+
+
+def test_montar_tabela_upos_sem_f1_entidade():
+    markdown, linhas_csv = agregar.montar_tabela("upos", [])
+    assert "f1_entidade" not in linhas_csv[0]
+    assert "f1_entidade" not in markdown
+
+
+def test_montar_tabela_crf_tempo_travessao():
+    linha = {
+        "modelo": "crf",
+        "precisao": 0.9,
+        "cobertura": 0.8,
+        "micro_f1": 0.85,
+        "f1_entidade": 0.7,
+        "tempo_s": None,
+        "tok_s": None,
+    }
+    _, linhas_csv = agregar.montar_tabela("ner", [linha])
+    linha_crf = linhas_csv[1]
+    assert linha_crf[0] == "crf"
+    assert linha_crf[-1] == "—" and linha_crf[-2] == "—"  # tok_s, tempo_s
+
+
+def test_agregar_degradacao_graciosa(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    from src.io.contrato import caminho_resultado
+
+    # Gold sintético via monkeypatch dos loaders usados em agregar.
+    monkeypatch.setattr(
+        agregar,
+        "carregar_gmb",
+        lambda **k: [Sentenca("1", [("a", "O"), ("b", "B-geo")]), Sentenca("2", [("c", "O")])],
+    )
+    monkeypatch.setattr(
+        agregar,
+        "carregar_conllu",
+        lambda **k: [Sentenca("1", [("o", "DET")])],
+    )
+    # Os loaders ficam dentro do dict LOADERS_GOLD (resolvido em import-time);
+    # repatch para apontar para os fakes.
+    monkeypatch.setitem(agregar.LOADERS_GOLD, "ner", agregar.carregar_gmb)
+    monkeypatch.setitem(agregar.LOADERS_GOLD, "upos", agregar.carregar_conllu)
+
+    # Só crf/ner presente (casa com gold de 3 tokens).
+    escrever_jsonl(
+        caminho_resultado("base_mapeada", "crf", "ner"),
+        _registros_ner(tags=("O", "B-geo", "O")),
+    )
+
+    resumo = agregar.agregar("base_mapeada")
+
+    import os
+
+    assert os.path.exists("resultados/base_mapeada/tabela_ner.md")
+    assert os.path.exists("resultados/base_mapeada/tabela_ner.csv")
+    assert os.path.exists("resultados/base_mapeada/tabela_upos.md")
+
+    with open("resultados/base_mapeada/tabela_ner.csv", encoding="utf-8") as f:
+        conteudo = f.read()
+    assert "crf" in conteudo
+    assert "llama3.1:8b" not in conteudo  # LLM ausente não vira linha
+
+    assert resumo["ausentes"]  # não vazio
+    assert resumo["erros"] == []
+    assert ("crf", "ner") in resumo["presentes"]
+
+
+def test_agregar_discrepancias_csv(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    from src.io.contrato import caminho_resultado
+
+    monkeypatch.setattr(
+        agregar,
+        "carregar_gmb",
+        lambda **k: [Sentenca("1", [("a", "O"), ("b", "B-geo")]), Sentenca("2", [("c", "O")])],
+    )
+    monkeypatch.setattr(agregar, "carregar_conllu", lambda **k: [])
+    monkeypatch.setitem(agregar.LOADERS_GOLD, "ner", agregar.carregar_gmb)
+    monkeypatch.setitem(agregar.LOADERS_GOLD, "upos", agregar.carregar_conllu)
+
+    # 1 token diverge: posição (1,1) gold B-geo, pred I-geo.
+    escrever_jsonl(
+        caminho_resultado("base_mapeada", "crf", "ner"),
+        _registros_ner(tags=("O", "I-geo", "O")),
+    )
+
+    agregar.agregar("base_mapeada")
+
+    with open("resultados/base_mapeada/discrepancias.csv", encoding="utf-8") as f:
+        linhas = f.read().strip().splitlines()
+    assert linhas[0] == "tarefa,modelo,sentenca_id,posicao,token,tag_gold,tag_predita"
+    # Uma única discrepância esperada.
+    assert linhas[1] == "ner,crf,1,1,b,B-geo,I-geo"
+    assert len(linhas) == 2
+
+
+def test_agregar_desalinhamento_reportado_nao_quebra(tmp_path, monkeypatch):
+    """.jsonl com nº de tokens != gold -> erro reportado, demais não derrubam."""
+    monkeypatch.chdir(tmp_path)
+    from src.io.contrato import caminho_resultado
+
+    monkeypatch.setattr(
+        agregar,
+        "carregar_gmb",
+        lambda **k: [Sentenca("1", [("a", "O"), ("b", "B-geo")]), Sentenca("2", [("c", "O")])],
+    )
+    monkeypatch.setattr(agregar, "carregar_conllu", lambda **k: [])
+    monkeypatch.setitem(agregar.LOADERS_GOLD, "ner", agregar.carregar_gmb)
+    monkeypatch.setitem(agregar.LOADERS_GOLD, "upos", agregar.carregar_conllu)
+
+    # Só 2 registros para 3 tokens do gold.
+    escrever_jsonl(
+        caminho_resultado("base_mapeada", "crf", "ner"),
+        _registros_ner(tags=("O", "B-geo", "O"))[:2],
+    )
+
+    resumo = agregar.agregar("base_mapeada")  # NÃO levanta
+    assert len(resumo["erros"]) == 1
+    assert "crf/ner" in resumo["erros"][0]

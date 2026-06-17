@@ -1,0 +1,188 @@
+{
+  "modelo": "crf",
+  "tarefa": "ner",
+  "por_classe": [
+    {
+      "classe": "B-art",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 43
+    },
+    {
+      "classe": "B-eve",
+      "precisao": 0.7142857142857143,
+      "cobertura": 0.5,
+      "f1": 0.588235294117647,
+      "suporte": 20
+    },
+    {
+      "classe": "B-geo",
+      "precisao": 0.6550348953140578,
+      "cobertura": 0.9521739130434783,
+      "f1": 0.7761370348493799,
+      "suporte": 690
+    },
+    {
+      "classe": "B-gpe",
+      "precisao": 0.9234567901234568,
+      "cobertura": 0.6111111111111112,
+      "f1": 0.7354965585054082,
+      "suporte": 612
+    },
+    {
+      "classe": "B-nat",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 13
+    },
+    {
+      "classe": "B-org",
+      "precisao": 0.8511166253101737,
+      "cobertura": 0.669921875,
+      "f1": 0.7497267759562841,
+      "suporte": 512
+    },
+    {
+      "classe": "B-per",
+      "precisao": 0.9265822784810127,
+      "cobertura": 0.912718204488778,
+      "f1": 0.9195979899497487,
+      "suporte": 401
+    },
+    {
+      "classe": "B-tim",
+      "precisao": 0.8970588235294118,
+      "cobertura": 0.8472222222222222,
+      "f1": 0.8714285714285713,
+      "suporte": 432
+    },
+    {
+      "classe": "I-art",
+      "precisao": 1.0,
+      "cobertura": 0.04,
+      "f1": 0.07692307692307693,
+      "suporte": 25
+    },
+    {
+      "classe": "I-eve",
+      "precisao": 0.8571428571428571,
+      "cobertura": 0.75,
+      "f1": 0.7999999999999999,
+      "suporte": 16
+    },
+    {
+      "classe": "I-geo",
+      "precisao": 0.8873239436619719,
+      "cobertura": 0.9545454545454546,
+      "f1": 0.9197080291970803,
+      "suporte": 132
+    },
+    {
+      "classe": "I-gpe",
+      "precisao": 1.0,
+      "cobertura": 0.14814814814814814,
+      "f1": 0.25806451612903225,
+      "suporte": 27
+    },
+    {
+      "classe": "I-nat",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 7
+    },
+    {
+      "classe": "I-org",
+      "precisao": 0.936231884057971,
+      "cobertura": 0.96996996996997,
+      "f1": 0.9528023598820058,
+      "suporte": 333
+    },
+    {
+      "classe": "I-per",
+      "precisao": 0.9655172413793104,
+      "cobertura": 0.9979035639412998,
+      "f1": 0.9814432989690721,
+      "suporte": 477
+    },
+    {
+      "classe": "I-tim",
+      "precisao": 0.8414634146341463,
+      "cobertura": 0.7040816326530612,
+      "f1": 0.7666666666666666,
+      "suporte": 98
+    },
+    {
+      "classe": "O",
+      "precisao": 0.9906533616291145,
+      "cobertura": 0.9964121894727281,
+      "f1": 0.9935244305574424,
+      "suporte": 22019
+    }
+  ],
+  "micro": {
+    "precisao": 0.9694473450129558,
+    "cobertura": 0.9694473450129558,
+    "f1": 0.9694473450129558
+  },
+  "entidade": {
+    "precisao": 0.7896538607835679,
+    "cobertura": 0.7623944179214102,
+    "f1": 0.7757847533632287,
+    "por_tipo": {
+      "art": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 43
+      },
+      "eve": {
+        "precisao": 0.6428571428571429,
+        "cobertura": 0.45,
+        "f1": 0.5294117647058824,
+        "suporte": 20
+      },
+      "geo": {
+        "precisao": 0.6480558325024925,
+        "cobertura": 0.9420289855072463,
+        "f1": 0.767867690490254,
+        "suporte": 690
+      },
+      "gpe": {
+        "precisao": 0.9234567901234568,
+        "cobertura": 0.6111111111111112,
+        "f1": 0.7354965585054082,
+        "suporte": 612
+      },
+      "nat": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 13
+      },
+      "org": {
+        "precisao": 0.8238213399503722,
+        "cobertura": 0.6484375,
+        "f1": 0.7256830601092896,
+        "suporte": 512
+      },
+      "per": {
+        "precisao": 0.9139240506329114,
+        "cobertura": 0.9002493765586035,
+        "f1": 0.907035175879397,
+        "suporte": 401
+      },
+      "tim": {
+        "precisao": 0.8578431372549019,
+        "cobertura": 0.8101851851851852,
+        "f1": 0.8333333333333334,
+        "suporte": 432
+      }
+    }
+  },
+  "n_tokens": 25857,
+  "tempo": null,
+  "velocidade": null
+}

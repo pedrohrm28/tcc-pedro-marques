@@ -199,5 +199,209 @@ def escrever_metricas_json(
     return caminho
 
 
+# --- Task 2: descoberta, tabelas, discrepâncias, orquestração, CLI ---------
+
+# Colunas das tabelas por tarefa (D-03). UPOS não tem f1_entidade.
+COLUNAS_NER = ["modelo", "precisao", "cobertura", "micro_f1", "f1_entidade", "tempo_s", "tok_s"]
+COLUNAS_UPOS = ["modelo", "precisao", "cobertura", "micro_f1", "tempo_s", "tok_s"]
+# Modelos sem .meta.json (não-LLM): tempo/velocidade = "—" na tabela (D-03).
+MODELOS_SEM_META = {"crf", "regras"}
+HEADER_DISCREPANCIAS = [
+    "tarefa", "modelo", "sentenca_id", "posicao", "token", "tag_gold", "tag_predita"
+]
+
+
+def descobrir_presentes(
+    base: str, modelos=MODELOS_ESPERADOS, tarefas=TAREFAS
+) -> tuple[list, list]:
+    """Varre (modelo, tarefa) e separa presentes de ausentes (D-06).
+
+    Returns:
+        ``(presentes, ausentes)`` — listas de tuplas ``(modelo, tarefa)``.
+        ``presentes`` = aqueles cujo ``caminho_resultado`` existe no disco;
+        ``ausentes`` = os demais (dos ``len(modelos) * len(tarefas)`` esperados).
+        Nunca levanta por ausência (degradação graciosa).
+    """
+    presentes: list[tuple[str, str]] = []
+    ausentes: list[tuple[str, str]] = []
+    for modelo in modelos:
+        for tarefa in tarefas:
+            if os.path.exists(caminho_resultado(base, modelo, tarefa)):
+                presentes.append((modelo, tarefa))
+            else:
+                ausentes.append((modelo, tarefa))
+    return presentes, ausentes
+
+
+def formatar_num(x) -> str:
+    """3 casas decimais; None/ausente -> '—'."""
+    if x is None:
+        return "—"
+    return f"{x:.3f}"
+
+
+def montar_tabela(tarefa: str, linhas_por_modelo: list[dict]) -> tuple[str, list]:
+    """Monta a tabela da tarefa em Markdown e em linhas CSV (D-03).
+
+    Args:
+        tarefa: "ner" ou "upos".
+        linhas_por_modelo: lista de dicts com chaves ``modelo``, ``precisao``,
+            ``cobertura``, ``micro_f1``, ``f1_entidade`` (só NER), ``tempo_s``,
+            ``tok_s``. Valores numéricos ou None.
+
+    Returns:
+        ``(markdown, linhas_csv)`` — ``linhas_csv`` inclui a linha de cabeçalho.
+    """
+    colunas = COLUNAS_NER if tarefa == "ner" else COLUNAS_UPOS
+
+    linhas_csv: list[list[str]] = [list(colunas)]
+    for linha in linhas_por_modelo:
+        celulas = [str(linha.get("modelo", ""))]
+        for col in colunas[1:]:
+            celulas.append(formatar_num(linha.get(col)))
+        linhas_csv.append(celulas)
+
+    # Markdown
+    md = ["| " + " | ".join(colunas) + " |"]
+    md.append("| " + " | ".join("---" for _ in colunas) + " |")
+    for celulas in linhas_csv[1:]:
+        md.append("| " + " | ".join(celulas) + " |")
+    markdown = "\n".join(md) + "\n"
+
+    return markdown, linhas_csv
+
+
+def escrever_tabelas(
+    base: str, tarefa: str, markdown: str, linhas_csv: list
+) -> tuple[str, str]:
+    """Grava ``tabela_<tarefa>.md`` e ``tabela_<tarefa>.csv`` em resultados/<base>/."""
+    dir_base = os.path.join("resultados", base)
+    os.makedirs(dir_base, exist_ok=True)
+    caminho_md = os.path.join(dir_base, f"tabela_{tarefa}.md")
+    caminho_csv = os.path.join(dir_base, f"tabela_{tarefa}.csv")
+    with open(caminho_md, "w", encoding="utf-8") as f:
+        f.write(markdown)
+    with open(caminho_csv, "w", encoding="utf-8", newline="") as f:
+        escritor = csv.writer(f)
+        escritor.writerows(linhas_csv)
+    return caminho_md, caminho_csv
+
+
+def escrever_discrepancias(base: str, registros_discrepancia: list) -> str:
+    """Grava o CSV único de discrepâncias em resultados/<base>/ (D-04).
+
+    Args:
+        registros_discrepancia: lista de tuplas/listas na ordem do header
+            ``tarefa,modelo,sentenca_id,posicao,token,tag_gold,tag_predita``.
+
+    Returns:
+        Caminho do ``discrepancias.csv``.
+    """
+    dir_base = os.path.join("resultados", base)
+    os.makedirs(dir_base, exist_ok=True)
+    caminho = os.path.join(dir_base, "discrepancias.csv")
+    with open(caminho, "w", encoding="utf-8", newline="") as f:
+        escritor = csv.writer(f)
+        escritor.writerow(HEADER_DISCREPANCIAS)
+        escritor.writerows(registros_discrepancia)
+    return caminho
+
+
+def agregar(base: str, limite: int = LIMITE_PADRAO) -> dict:
+    """Orquestra a agregação completa para uma base.
+
+    Para cada ``(modelo, tarefa)`` presente: carrega o gold (cache por tarefa),
+    lê o ``.jsonl``, alinha, calcula métricas, escreve o JSON D-02, acumula a
+    linha da tabela e as discrepâncias. Erros de desalinhamento de UM modelo são
+    capturados e reportados — não derrubam os demais (D-05/D-06). Ao final,
+    escreve as tabelas NER e UPOS e o CSV único de discrepâncias.
+
+    Returns:
+        ``{"presentes": [...], "ausentes": [...], "erros": [...],
+           "arquivos": [...]}``.
+    """
+    presentes, ausentes = descobrir_presentes(base)
+    erros: list[str] = []
+    arquivos: list[str] = []
+
+    cache_gold: dict[str, list[Sentenca]] = {}
+    linhas_por_tarefa: dict[str, list[dict]] = {t: [] for t in TAREFAS}
+    discrepancias_todas: list[list] = []
+
+    for modelo, tarefa in presentes:
+        try:
+            if tarefa not in cache_gold:
+                cache_gold[tarefa] = carregar_gold(tarefa, limite=limite)
+            gold = cache_gold[tarefa]
+
+            caminho_jsonl = caminho_resultado(base, modelo, tarefa)
+            registros = ler_jsonl(caminho_jsonl)
+            gold_seqs, pred_seqs, discrepancias = alinhar_predicao(gold, registros)
+
+            metricas = calcular_metricas(tarefa, gold_seqs, pred_seqs)
+            tempo, velocidade = ler_meta(caminho_jsonl)
+            caminho_json = escrever_metricas_json(
+                base, modelo, tarefa, metricas, tempo, velocidade
+            )
+            arquivos.append(caminho_json)
+
+            ent = metricas["entidade"]
+            linhas_por_tarefa[tarefa].append(
+                {
+                    "modelo": modelo,
+                    "precisao": metricas["micro"]["precisao"],
+                    "cobertura": metricas["micro"]["cobertura"],
+                    "micro_f1": metricas["micro"]["f1"],
+                    "f1_entidade": ent["f1"] if ent else None,
+                    "tempo_s": None if modelo in MODELOS_SEM_META else tempo,
+                    "tok_s": None if modelo in MODELOS_SEM_META else velocidade,
+                }
+            )
+
+            for (sid, pos, token, tag_gold, tag_predita) in discrepancias:
+                discrepancias_todas.append(
+                    [tarefa, modelo, sid, pos, token, tag_gold, tag_predita]
+                )
+        except Exception as e:  # noqa: BLE001 — erro por-modelo não derruba os demais
+            erros.append(f"{modelo}/{tarefa}: {e}")
+
+    # Tabelas por tarefa (sempre escreve, mesmo só com cabeçalho).
+    for tarefa in TAREFAS:
+        markdown, linhas_csv = montar_tabela(tarefa, linhas_por_tarefa[tarefa])
+        caminho_md, caminho_csv = escrever_tabelas(base, tarefa, markdown, linhas_csv)
+        arquivos.extend([caminho_md, caminho_csv])
+
+    arquivos.append(escrever_discrepancias(base, discrepancias_todas))
+
+    return {
+        "presentes": presentes,
+        "ausentes": ausentes,
+        "erros": erros,
+        "arquivos": arquivos,
+    }
+
+
+def main(argv: Optional[list[str]] = None) -> int:
+    parser = argparse.ArgumentParser(
+        description="Agrega .jsonl de predição em métricas, tabelas e CSV de discrepâncias."
+    )
+    parser.add_argument("--base", default="base_mapeada", help="base_mapeada ou base_nova.")
+    parser.add_argument(
+        "--limite", type=int, default=LIMITE_PADRAO, help="Nº de sentenças do gold."
+    )
+    args = parser.parse_args(argv)
+
+    resumo = agregar(args.base, limite=args.limite)
+
+    print(f"[agregar] base={args.base} — {len(resumo['presentes'])} presente(s).")
+    for modelo, tarefa in resumo["ausentes"]:
+        print(f"[agregar] ausente: {modelo}/{tarefa}")
+    for erro in resumo["erros"]:
+        print(f"[agregar] ERRO {erro}")
+    for arquivo in resumo["arquivos"]:
+        print(f"[agregar] gerado: {arquivo}")
+    return 0
+
+
 if __name__ == "__main__":
-    raise SystemExit(main())  # noqa: F821 — main definido no plano 04-02 Task 2
+    raise SystemExit(main())
