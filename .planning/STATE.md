@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Ready to execute
-last_updated: "2026-06-17T16:53:08.899Z"
+status: Executing Phase 04
+last_updated: "2026-06-17T17:00:49.000Z"
 progress:
   total_phases: 5
   completed_phases: 3
   total_plans: 8
-  completed_plans: 6
-  percent: 75
+  completed_plans: 7
+  percent: 88
 ---
 
 # Project State
@@ -19,15 +19,15 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-16)
 
 **Core value:** Tabela comparativa única e defensável (precisão/cobertura/F1) dos 4 modelos sobre as mesmas sentenças, reprodutível.
-**Current focus:** Phase 03 — runner-llm-ollama
+**Current focus:** Phase 04 — agregador-e-relatorio
 
 ## Status
 
 - **Initialized:** 2026-06-16
 - **Granularity:** coarse · **Workflow:** light (sem research/plan-check, com verifier)
 - **Phases:** 5 (ver ROADMAP.md)
-- **Next action:** executar plano 04-01 (agregador — núcleo de métricas por classe, micro, nível de entidade).
-- **Last session:** 2026-06-17 — Plano 03-02 completo (run_llm.py CLI: append incremental, resume, métricas). 6 testes passam sem rede. Commits: 831a4f1 (Task 1), 2c04a0e (Task 2).
+- **Next action:** executar plano 04-02 (CLI agregador — lê .jsonl, monta JSON de métricas + tabelas MD/CSV + CSV de discrepâncias).
+- **Last session:** 2026-06-17 — Plano 04-01 completo (src/metricas.py: metricas_token copiado do legado + metricas_entidade refatorado de print->return via seqeval). 8 testes sintéticos passam. Commits: f51177d/0cd9821 (Task 1 test/feat), 9dcc76a/675623b (Task 2 test/feat).
 
 ## Decisions Log
 
@@ -41,6 +41,7 @@ See: .planning/PROJECT.md (updated 2026-06-16)
 - **CRF (02-01):** split explícito sem vazamento — teste = `carregar_gmb(limite=1167)`, treino = ids GMB 1168..2999 (1832 sentenças). ner.csv saneado na leitura (filtro de `sentence_idx` não-numérico + dedupe da duplicação de tokens). Modelo cacheado em `modelos/crf_ner.pkl` (gitignored), `--retrain` força re-treino.
 - **03-01 (núcleo LLM, 2026-06-17):** UPOS_VALIDOS importado de run_regras (não redefinido no módulo llm) — evita divergência de esquema. extrair_array aceita dict{'tags':[...]} ou lista direta. Fallback total quando len(arr)!=len(tokens). INSTRUCAO_NER em inglês (GMB), INSTRUCAO_UPOS em português (Bosque).
 - **03-02 (runner CLI, 2026-06-17):** fn_gerar injetável no rodar() para mock sem rede. Escrita modo 'a' direto (não escrever_jsonl 'w'). modelo preserva ':' no Registro; caminho sanitiza via caminho_resultado. meta.json com tok/s, sent/s, fallbacks por (modelo, tarefa).
+- **04-01 (núcleo de métricas, 2026-06-17):** src/metricas.py puro (sem print/I/O/rede). metricas_token copiado verbatim do comparativo_gold.py (l.149-170): retorna (linhas, micro), suporte=tp+fn, div-zero->0.0. metricas_entidade REFATORADO de print (legado l.181-185) para RETORNAR dict {precisao,cobertura,f1,por_tipo} via seqeval; import lazy + RuntimeError claro se seqeval ausente; por_tipo filtra micro/macro/weighted avg + accuracy. alinhar copiado como referência. seqeval instalado no ambiente (Regra 3).
 
 ## Notes
 

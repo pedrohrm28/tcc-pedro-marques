@@ -75,7 +75,7 @@ Plans:
 
 Plans:
 **Wave 1**
-- [ ] 04-01-PLAN.md — Núcleo de métricas puro (`src/metricas.py`): `metricas_token` (por classe + micro) copiado do legado + `metricas_entidade` (seqeval) REFATORADO para RETORNAR dados; testes TDD com sequências sintéticas
+- [x] 04-01-PLAN.md — Núcleo de métricas puro (`src/metricas.py`): `metricas_token` (por classe + micro) copiado do legado + `metricas_entidade` (seqeval) REFATORADO para RETORNAR dados; testes TDD com sequências sintéticas
 
 **Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 04-02-PLAN.md — `agregar.py` CLI: alinha `.jsonl` ao gold, emite JSON por (modelo,tarefa) + tabelas MD/CSV por tarefa + CSV de discrepâncias, com degradação graciosa quando faltam os `.jsonl` dos LLMs
