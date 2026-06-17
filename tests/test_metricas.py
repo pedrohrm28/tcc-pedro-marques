@@ -8,7 +8,10 @@ from __future__ import annotations
 
 import pytest
 
-from src.metricas import metricas_token
+from src.metricas import metricas_entidade, metricas_token
+
+# metricas_entidade depende de seqeval; pular os testes de entidade se ausente.
+pytest.importorskip("seqeval")
 
 
 # ---------------------------------------------------------------------------
@@ -79,3 +82,55 @@ def test_token_suporte_conta_ocorrencias_no_gold():
     linhas, _micro = metricas_token([["O", "O", "O"]], [["O", "O", "O"]])
     _c, _p, _r, _f, sup = _linha(linhas, "O")
     assert sup == 3
+
+
+# ---------------------------------------------------------------------------
+# Task 2 — metricas_entidade (nível entidade, via seqeval, RETORNA dados)
+# ---------------------------------------------------------------------------
+
+
+def test_entidade_perfeita():
+    """Spans idênticos => precisao/cobertura/f1 == 1.0; por_tipo com geo e per."""
+    gold = [["B-geo", "I-geo", "O"], ["B-per", "O"]]
+    pred = [["B-geo", "I-geo", "O"], ["B-per", "O"]]
+    d = metricas_entidade(gold, pred)
+    assert d["precisao"] == pytest.approx(1.0)
+    assert d["cobertura"] == pytest.approx(1.0)
+    assert d["f1"] == pytest.approx(1.0)
+    assert "geo" in d["por_tipo"]
+    assert "per" in d["por_tipo"]
+    assert d["por_tipo"]["geo"]["f1"] == pytest.approx(1.0)
+    assert d["por_tipo"]["geo"]["suporte"] == 1
+    assert d["por_tipo"]["per"]["f1"] == pytest.approx(1.0)
+    assert d["por_tipo"]["per"]["suporte"] == 1
+
+
+def test_entidade_span_parcial_nao_casa():
+    """gold span de 2 tokens vs pred span de 1 token: 'geo' P/R/F1 == 0.0."""
+    gold = [["B-geo", "I-geo"]]
+    pred = [["B-geo", "O"]]
+    d = metricas_entidade(gold, pred)
+    assert d["por_tipo"]["geo"]["precisao"] == pytest.approx(0.0)
+    assert d["por_tipo"]["geo"]["cobertura"] == pytest.approx(0.0)
+    assert d["por_tipo"]["geo"]["f1"] == pytest.approx(0.0)
+    assert d["precisao"] == pytest.approx(0.0)
+    assert d["cobertura"] == pytest.approx(0.0)
+    assert d["f1"] == pytest.approx(0.0)
+
+
+def test_entidade_nao_imprime(capsys):
+    """metricas_entidade não escreve nada no stdout (refatoração do legado)."""
+    gold = [["B-geo", "I-geo", "O"]]
+    pred = [["B-geo", "I-geo", "O"]]
+    metricas_entidade(gold, pred)
+    captured = capsys.readouterr()
+    assert captured.out == ""
+
+
+def test_entidade_filtra_chaves_agregadas():
+    """por_tipo NÃO contém 'micro avg'/'macro avg'/'weighted avg'/'accuracy'."""
+    gold = [["B-geo", "I-geo", "O"], ["B-per", "O"]]
+    pred = [["B-geo", "I-geo", "O"], ["B-per", "O"]]
+    d = metricas_entidade(gold, pred)
+    agregadas = {"micro avg", "macro avg", "weighted avg", "accuracy"}
+    assert agregadas.isdisjoint(d["por_tipo"].keys())
