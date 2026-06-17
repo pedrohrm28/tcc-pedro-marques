@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: Executing Phase 03
-last_updated: "2026-06-17T15:29:00Z"
+last_updated: "2026-06-17T15:37:06.695Z"
 progress:
   total_phases: 5
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 6
-  completed_plans: 5
-  percent: 75
+  completed_plans: 6
+  percent: 100
 ---
 
 # Project State
@@ -26,8 +26,8 @@ See: .planning/PROJECT.md (updated 2026-06-16)
 - **Initialized:** 2026-06-16
 - **Granularity:** coarse · **Workflow:** light (sem research/plan-check, com verifier)
 - **Phases:** 5 (ver ROADMAP.md)
-- **Next action:** executar plano 03-02 (run_llm.py CLI: loop 1 sentença/chamada, emissão .jsonl incremental + resume, métricas tok/s).
-- **Last session:** 2026-06-17 — Plano 03-01 completo (parser + prompts + cliente Ollama). 33 testes passam sem rede. Commits: ee52969 (Task 1), 348e120 (Task 2).
+- **Next action:** executar plano 04-01 (agregador — núcleo de métricas por classe, micro, nível de entidade).
+- **Last session:** 2026-06-17 — Plano 03-02 completo (run_llm.py CLI: append incremental, resume, métricas). 6 testes passam sem rede. Commits: 831a4f1 (Task 1), 2c04a0e (Task 2).
 
 ## Decisions Log
 
@@ -40,6 +40,7 @@ See: .planning/PROJECT.md (updated 2026-06-16)
 - **NER usa 1167 sentenças** (= N do POS/Bosque), não as 150 do TCC I. Decisão (2026-06-16): priorizar robustez estatística sobre comparabilidade 1:1; apresentar como evolução do TCC I. GMB tem 2999 disponíveis; `limite` é parâmetro do loader, sem mudança de código na Fase 1. Impacto: ~7,8× mais chamadas de LLM nas Fases 3-4.
 - **CRF (02-01):** split explícito sem vazamento — teste = `carregar_gmb(limite=1167)`, treino = ids GMB 1168..2999 (1832 sentenças). ner.csv saneado na leitura (filtro de `sentence_idx` não-numérico + dedupe da duplicação de tokens). Modelo cacheado em `modelos/crf_ner.pkl` (gitignored), `--retrain` força re-treino.
 - **03-01 (núcleo LLM, 2026-06-17):** UPOS_VALIDOS importado de run_regras (não redefinido no módulo llm) — evita divergência de esquema. extrair_array aceita dict{'tags':[...]} ou lista direta. Fallback total quando len(arr)!=len(tokens). INSTRUCAO_NER em inglês (GMB), INSTRUCAO_UPOS em português (Bosque).
+- **03-02 (runner CLI, 2026-06-17):** fn_gerar injetável no rodar() para mock sem rede. Escrita modo 'a' direto (não escrever_jsonl 'w'). modelo preserva ':' no Registro; caminho sanitiza via caminho_resultado. meta.json com tok/s, sent/s, fallbacks por (modelo, tarefa).
 
 ## Notes
 

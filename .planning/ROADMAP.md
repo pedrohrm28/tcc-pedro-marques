@@ -10,7 +10,7 @@ Do contrato de dados ao relatório final: primeiro fixamos o formato `.jsonl` co
 
 - [x] **Phase 1: Fundação — contrato e leitura de corpora** - Formato `.jsonl` comum, loaders de GMB/CoNLL-U, scaffolding do projeto
 - [x] **Phase 2: Baselines tradicionais** - CRF (NER) treinado do `ner.csv` + modelo de regras (POS) sobre o Bosque
-- [ ] **Phase 3: Runner LLM (Ollama)** - Inferência reprodutível dos 3 LLMs (llama3.1:8b, qwen2.5:3b, llama3.2:3b) em NER e UPOS
+- [x] **Phase 3: Runner LLM (Ollama)** - Inferência reprodutível dos 3 LLMs (llama3.1:8b, qwen2.5:3b, llama3.2:3b) em NER e UPOS
 - [ ] **Phase 4: Agregador e relatório** - Métricas alinhadas ao gold, tabela comparativa dos 5 modelos + CSV de discrepâncias
 - [ ] **Phase 5: Base nova e generalização** - Gerar sentenças fora de domínio e rodar os 5 modelos nelas
 
@@ -61,7 +61,7 @@ Plans:
 - [x] 03-01-PLAN.md — Núcleo puro/mockável: prompts versionados (NER IOB + UPOS) + cliente Ollama reprodutível (temperature=0/seed=42/keep_alive=-1/format=json) + parser robusto com fallback rastreável
 
 **Wave 2** *(blocked on Wave 1 completion)*
-- [ ] 03-02-PLAN.md — run_llm.py CLI: loop 1 sentença/chamada, emissão `.jsonl` incremental + resume, métricas tok/s e sent/s por (modelo,tarefa)
+- [x] 03-02-PLAN.md — run_llm.py CLI: loop 1 sentença/chamada, emissão `.jsonl` incremental + resume, métricas tok/s e sent/s por (modelo,tarefa)
 
 ### Phase 4: Agregador e relatório
 **Goal**: `comparativo_gold.py` lê todos os `.jsonl`, alinha ao gold, calcula métricas e monta a tabela comparativa dos 5 modelos + discrepâncias.
@@ -101,7 +101,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 |-------|----------------|--------|-----------|
 | 1. Fundação — contrato e leitura | 2/2 | Complete | 2026-06-16 |
 | 2. Baselines tradicionais | 2/2 | Complete | 2026-06-16 |
-| 3. Runner LLM (3 LLMs, Ollama) | 1/2 | In progress | - |
+| 3. Runner LLM (3 LLMs, Ollama) | 2/2 | Complete | 2026-06-17 |
 | 4. Agregador e relatório | 0/2 | Not started | - |
 | 5. Base nova e generalização | 0/2 | Not started | - |
 </content>
