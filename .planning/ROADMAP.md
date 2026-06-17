@@ -57,7 +57,10 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
+**Wave 1**
 - [ ] 03-01-PLAN.md — Núcleo puro/mockável: prompts versionados (NER IOB + UPOS) + cliente Ollama reprodutível (temperature=0/seed=42/keep_alive=-1/format=json) + parser robusto com fallback rastreável
+
+**Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 03-02-PLAN.md — run_llm.py CLI: loop 1 sentença/chamada, emissão `.jsonl` incremental + resume, métricas tok/s e sent/s por (modelo,tarefa)
 
 ### Phase 4: Agregador e relatório
