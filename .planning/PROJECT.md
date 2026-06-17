@@ -2,11 +2,13 @@
 
 ## What This Is
 
-Ferramenta de avaliação reprodutível que compara o desempenho de **LLMs open-source** (gpt-oss 20B e 120B, via Ollama) contra **modelos tradicionais de extração** — um **CRF** (Conditional Random Fields) para NER e um **modelo baseado em regras** para POS tagging — usando anotações de referência (gold standard) curadas por linguistas. É a continuação do TCC I, que comparou o GPT-4.1 Nano contra esses mesmos dois baselines; aqui o LLM proprietário é trocado por LLMs open-source.
+Ferramenta de avaliação reprodutível que compara o desempenho de um **LLM open-source** (Llama 3.1 8B, via Ollama) contra **modelos tradicionais de extração** — um **CRF** (Conditional Random Fields) para NER e um **modelo baseado em regras** para POS tagging — usando anotações de referência (gold standard) curadas por linguistas. É a continuação do TCC I, que comparou o GPT-4.1 Nano contra esses mesmos dois baselines; aqui o LLM proprietário é trocado por um LLM open-source.
+
+> **Revisão (2026-06-17):** o plano original previa `gpt-oss:20b` e `gpt-oss:120b` via Ollama. Esses modelos não rodam no hardware disponível (7,8 GB RAM, GTX 1650 4 GB VRAM, ~16 GB de disco livre): o 20b precisa de ~16 GB de memória e o 120b de ~80 GB + ~65 GB de download. Decisão: substituir por **`llama3.1:8b`** (~4,7 GB, roda localmente, forte em PT e EN), o único LLM open-source da comparação. A pergunta de pesquisa passa a ser **LLM open-source 8B × CRF × regras** (3 modelos), não mais "gpt-oss grande vs. pequeno".
 
 ## Core Value
 
-Produzir uma **tabela comparativa única e defensável** (precisão, cobertura, F1) dos 4 modelos sobre as mesmas sentenças, com discrepâncias token a token para análise qualitativa — tudo reprodutível (`temperature=0`, `seed=42`).
+Produzir uma **tabela comparativa única e defensável** (precisão, cobertura, F1) dos 3 modelos sobre as mesmas sentenças, com discrepâncias token a token para análise qualitativa — tudo reprodutível (`temperature=0`, `seed=42`).
 
 ## Requirements
 
@@ -19,15 +21,15 @@ Produzir uma **tabela comparativa única e defensável** (precisão, cobertura, 
 - [ ] REQ-01: Contrato de saída comum (`.jsonl` de predições) que todos os scripts de modelo emitem
 - [ ] REQ-02: Baseline CRF (NER) treinado a partir do `ner.csv` e prevendo sobre o conjunto de teste GMB
 - [ ] REQ-03: Baseline baseado em regras (POS/UPOS) sobre o subconjunto Bosque (.conllu)
-- [ ] REQ-04: Runner gpt-oss (20B e 120B via Ollama) para NER e UPOS, com `temperature=0`/`seed=42`
+- [ ] REQ-04: Runner LLM (`llama3.1:8b` via Ollama) para NER e UPOS, com `temperature=0`/`seed=42`
 - [ ] REQ-05: Agregador (`comparativo_gold.py`) que alinha predições ao gold e calcula precisão/cobertura/F1 (por classe, micro, e nível de entidade para NER)
-- [ ] REQ-06: Saída final: tabela comparativa dos 4 modelos + CSV de discrepâncias token a token
-- [ ] REQ-07: Geração da base nova (sentenças fora de domínio) e execução dos 4 modelos sobre ela
+- [ ] REQ-06: Saída final: tabela comparativa dos 3 modelos + CSV de discrepâncias token a token
+- [ ] REQ-07: Geração da base nova (sentenças fora de domínio) e execução dos 3 modelos sobre ela
 
 ### Out of Scope
 
 - Corpus de NER em português — o NER do TCC I sempre foi o GMB (inglês); só a tarefa de POS é em português (Bosque). Confirmado pelo autor.
-- Re-treinar/fine-tunar os LLMs — usamos os gpt-oss prontos via Ollama.
+- Re-treinar/fine-tunar o LLM — usamos o `llama3.1:8b` pronto via Ollama.
 - Análise sintática/dependências do Bosque (colunas HEAD/DEPREL do CoNLL-U) — só usamos UPOS.
 - Reaproveitar números do TCC I — decidido re-rodar os 4 modelos no mesmo pipeline para uniformidade total.
 
@@ -41,13 +43,13 @@ Produzir uma **tabela comparativa única e defensável** (precisão, cobertura, 
 - **Referências de origem dos baselines:**
   - CRF: https://www.kaggle.com/code/bavalpreet26/ner-using-crf/notebook
   - Modelo baseado em regras (Bosque): https://github.com/UniversalDependencies/UD_Portuguese-Bosque
-- **Decisão de arquitetura:** scripts separados por modelo (heterogêneos: CRF treina sobre 1M linhas, regras é determinístico, LLMs são lentos via Ollama) + agregador puro que lê os `.jsonl`. Isolamento de falha, re-execução barata do LLM sem re-rodar o CRF, e metodologia defensável na banca.
+- **Decisão de arquitetura:** scripts separados por modelo (heterogêneos: CRF treina sobre 1M linhas, regras é determinístico, o LLM é lento via Ollama) + agregador puro que lê os `.jsonl`. Isolamento de falha, re-execução barata do LLM sem re-rodar o CRF, e metodologia defensável na banca.
 
 ## Constraints
 
-- **Tech stack**: Python; `sklearn-crfsuite`/scikit-learn (CRF); Ollama (gpt-oss); parsing CoNLL/CoNLL-U.
-- **Reprodutibilidade**: `temperature=0`, `seed=42` para os LLMs.
-- **Ambiente**: Ollama precisa estar no ar com os modelos baixados (`gpt-oss:20b`, `gpt-oss:120b`); 120B é grande e lento.
+- **Tech stack**: Python; `sklearn-crfsuite`/scikit-learn (CRF); Ollama (`llama3.1:8b`); parsing CoNLL/CoNLL-U.
+- **Reprodutibilidade**: `temperature=0`, `seed=42` para o LLM.
+- **Ambiente**: Ollama precisa estar no ar com o modelo baixado (`ollama pull llama3.1:8b`, ~4,7 GB). Roda na máquina local (7,8 GB RAM, GTX 1650 4 GB) com offload parcial p/ CPU — lento (~2-8 tok/s), mas viável.
 - **Idioma**: NER em inglês (GMB), POS em português (Bosque) — intencional, herdado do TCC I.
 
 ## Key Decisions
@@ -58,6 +60,7 @@ Produzir uma **tabela comparativa única e defensável** (precisão, cobertura, 
 | Re-rodar os 4 modelos no mesmo pipeline | Uniformidade total + base nova não tem números prontos do TCC I | — Pending |
 | GMB (inglês) como gold de NER | Herdado do TCC I; só POS é em português | — Pending |
 | `GMB_dataset.txt` como gold, `ner.csv` só como input do CRF | As 25 colunas do csv são features do CRF, ruído para o gold | — Pending |
+| LLM = `llama3.1:8b` em vez de gpt-oss 20b/120b | Hardware local (7,8 GB RAM, GTX 1650 4 GB) não roda 20b/120b; 8B cabe | ✅ 2026-06-17 |
 
 ---
-*Last updated: 2026-06-16 after project initialization*
+*Last updated: 2026-06-17 — LLM trocado de gpt-oss 20b/120b para llama3.1:8b (restrição de hardware)*

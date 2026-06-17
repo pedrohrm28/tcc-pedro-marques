@@ -2,13 +2,15 @@
 
 ## Overview
 
-Do contrato de dados ao relatório final: primeiro fixamos o formato `.jsonl` comum e o esqueleto de leitura dos corpora; depois implementamos os dois baselines tradicionais (CRF para NER, regras para POS); então o runner dos LLMs gpt-oss via Ollama; em seguida o agregador que une tudo numa tabela comparativa + discrepâncias; por fim, geramos a base nova e rodamos os 4 modelos nela para avaliar generalização.
+Do contrato de dados ao relatório final: primeiro fixamos o formato `.jsonl` comum e o esqueleto de leitura dos corpora; depois implementamos os dois baselines tradicionais (CRF para NER, regras para POS); então o runner do LLM `llama3.1:8b` via Ollama; em seguida o agregador que une tudo numa tabela comparativa + discrepâncias; por fim, geramos a base nova e rodamos os 3 modelos nela para avaliar generalização.
+
+> **Revisão (2026-06-17):** LLM trocado de `gpt-oss:20b`/`gpt-oss:120b` para `llama3.1:8b` (restrição de hardware local — ver PROJECT.md). Comparação passa de 4 para 3 modelos.
 
 ## Phases
 
 - [x] **Phase 1: Fundação — contrato e leitura de corpora** - Formato `.jsonl` comum, loaders de GMB/CoNLL-U, scaffolding do projeto
 - [x] **Phase 2: Baselines tradicionais** - CRF (NER) treinado do `ner.csv` + modelo de regras (POS) sobre o Bosque
-- [ ] **Phase 3: Runner gpt-oss (Ollama)** - Inferência reprodutível dos LLMs 20B/120B em NER e UPOS
+- [ ] **Phase 3: Runner LLM (Ollama)** - Inferência reprodutível do `llama3.1:8b` em NER e UPOS
 - [ ] **Phase 4: Agregador e relatório** - Métricas alinhadas ao gold, tabela comparativa dos 4 modelos + CSV de discrepâncias
 - [ ] **Phase 5: Base nova e generalização** - Gerar sentenças fora de domínio e rodar os 4 modelos nelas
 
@@ -42,12 +44,12 @@ Plans:
 - [x] 02-01: `run_crf.py` — treino + predição NER (sklearn-crfsuite, features do ner.csv)
 - [x] 02-02: `run_regras.py` — anotação POS/UPOS por regras sobre o Bosque
 
-### Phase 3: Runner gpt-oss (Ollama)
-**Goal**: Rodar gpt-oss 20B e 120B via Ollama nas duas tarefas, de forma reprodutível, convertendo a saída do LLM de volta ao contrato comum.
+### Phase 3: Runner LLM (Ollama)
+**Goal**: Rodar `llama3.1:8b` via Ollama nas duas tarefas, de forma reprodutível, convertendo a saída do LLM de volta ao contrato comum.
 **Depends on**: Phase 1
 **Requirements**: REQ-04
 **Success Criteria** (what must be TRUE):
-  1. `run_gptoss.py --modelo gpt-oss:20b|120b --tarefa ner|upos` produz `.jsonl` alinhado token a token ao gold.
+  1. `run_llm.py --modelo llama3.1:8b --tarefa ner|upos` produz `.jsonl` alinhado token a token ao gold.
   2. Execução usa `temperature=0` e `seed=42`; prompts versionados.
   3. Parsing robusto: tokens sem resposta do LLM viram tag de fallback rastreável, sem quebrar o alinhamento.
 **Plans**: TBD
@@ -57,12 +59,12 @@ Plans:
 - [ ] 03-02: Parser/realinhador da saída do LLM para o contrato comum + tratamento de falhas
 
 ### Phase 4: Agregador e relatório
-**Goal**: `comparativo_gold.py` lê todos os `.jsonl`, alinha ao gold, calcula métricas e monta a tabela comparativa dos 4 modelos + discrepâncias.
+**Goal**: `comparativo_gold.py` lê todos os `.jsonl`, alinha ao gold, calcula métricas e monta a tabela comparativa dos 3 modelos + discrepâncias.
 **Depends on**: Phase 2, Phase 3
 **Requirements**: REQ-05, REQ-06
 **Success Criteria** (what must be TRUE):
   1. Calcula precisão, cobertura e F1 por classe, micro, e em nível de entidade (NER/IOB).
-  2. Emite uma tabela comparativa única (Markdown/CSV) com os 4 modelos × tarefas.
+  2. Emite uma tabela comparativa única (Markdown/CSV) com os 3 modelos × tarefas.
   3. Emite CSV de discrepâncias token a token por modelo para análise qualitativa.
 **Plans**: TBD
 
@@ -71,12 +73,12 @@ Plans:
 - [ ] 04-02: Agregação multi-modelo → tabela comparativa + CSV de discrepâncias
 
 ### Phase 5: Base nova e generalização
-**Goal**: Gerar a base nova (fora de domínio) e rodar os 4 modelos nela, reusando todo o pipeline.
+**Goal**: Gerar a base nova (fora de domínio) e rodar os 3 modelos nela, reusando todo o pipeline.
 **Depends on**: Phase 4
 **Requirements**: REQ-07
 **Success Criteria** (what must be TRUE):
   1. Existe a base nova em `datasets/base_nova/` (NER inglês + POS português) no formato dos loaders.
-  2. Os 4 modelos rodam sobre a base nova e o agregador produz a tabela comparativa correspondente.
+  2. Os 3 modelos rodam sobre a base nova e o agregador produz a tabela comparativa correspondente.
   3. Resultados das duas bases ficam separados em `resultados/` para comparação mapeada × nova.
 **Plans**: TBD
 
@@ -94,6 +96,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 |-------|----------------|--------|-----------|
 | 1. Fundação — contrato e leitura | 2/2 | Complete | 2026-06-16 |
 | 2. Baselines tradicionais | 2/2 | Complete | 2026-06-16 |
-| 3. Runner gpt-oss (Ollama) | 0/2 | Not started | - |
+| 3. Runner LLM llama3.1:8b (Ollama) | 0/2 | Not started | - |
 | 4. Agregador e relatório | 0/2 | Not started | - |
 | 5. Base nova e generalização | 0/2 | Not started | - |
