@@ -54,11 +54,11 @@ Plans:
   3. Parsing robusto: tokens sem resposta do LLM viram tag de fallback rastreável, sem quebrar o alinhamento.
   4. Cada execução registra tempo total e velocidade (tok/s ou sent/s) do modelo, para o eixo de comparação tamanho/velocidade.
   5. Execução retomável: progresso parcial é persistido para não perder horas de processamento se travar.
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 03-01: Cliente Ollama (1 sentença/chamada, keep_alive, métricas de tempo) + prompts de NER (IOB) e UPOS, reprodutíveis
-- [ ] 03-02: Parser/realinhador da saída do LLM para o contrato comum + tratamento de falhas + cache/retomada incremental
+- [ ] 03-01-PLAN.md — Núcleo puro/mockável: prompts versionados (NER IOB + UPOS) + cliente Ollama reprodutível (temperature=0/seed=42/keep_alive=-1/format=json) + parser robusto com fallback rastreável
+- [ ] 03-02-PLAN.md — run_llm.py CLI: loop 1 sentença/chamada, emissão `.jsonl` incremental + resume, métricas tok/s e sent/s por (modelo,tarefa)
 
 ### Phase 4: Agregador e relatório
 **Goal**: `comparativo_gold.py` lê todos os `.jsonl`, alinha ao gold, calcula métricas e monta a tabela comparativa dos 5 modelos + discrepâncias.
@@ -101,3 +101,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 3. Runner LLM (3 LLMs, Ollama) | 0/2 | Not started | - |
 | 4. Agregador e relatório | 0/2 | Not started | - |
 | 5. Base nova e generalização | 0/2 | Not started | - |
+</content>
