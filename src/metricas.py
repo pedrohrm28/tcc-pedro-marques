@@ -52,3 +52,49 @@ def metricas_token(gold_seqs, pred_seqs):
     micro_r = TP / (TP + FN) if (TP + FN) else 0.0
     micro_f = 2 * micro_p * micro_r / (micro_p + micro_r) if (micro_p + micro_r) else 0.0
     return linhas, (micro_p, micro_r, micro_f)
+
+
+# Chaves agregadas do classification_report do seqeval que NÃO são tipos de entidade.
+_CHAVES_AGREGADAS = {"micro avg", "macro avg", "weighted avg", "accuracy"}
+
+
+def metricas_entidade(gold_seqs, pred_seqs):
+    """Precisao/cobertura/F1 em nivel de ENTIDADE (so para NER/IOB), via seqeval.
+
+    REFATORADO do legado (comparativo_gold.py l.173-185), que IMPRIMIA o
+    classification_report e as métricas. Aqui RETORNAMOS um dict, sem print::
+
+        {
+          "precisao": float, "cobertura": float, "f1": float,
+          "por_tipo": {tipo: {"precisao", "cobertura", "f1", "suporte"}, ...},
+        }
+
+    ``gold_seqs``/``pred_seqs`` são listas de listas de tags IOB por sentença
+    (ex ``[["O","B-geo","I-geo"], ["B-per","I-per"]]``).
+
+    Levanta ``RuntimeError`` claro se seqeval não estiver instalado — o
+    agregador precisa do número, silenciar levaria a tabela errada.
+    """
+    try:
+        from seqeval.metrics import (classification_report, f1_score,
+                                     precision_score, recall_score)
+    except ImportError as e:
+        raise RuntimeError("seqeval não instalado (pip install seqeval)") from e
+
+    relatorio = classification_report(gold_seqs, pred_seqs, output_dict=True)
+    por_tipo = {}
+    for tipo, m in relatorio.items():
+        if tipo in _CHAVES_AGREGADAS:
+            continue
+        por_tipo[tipo] = {
+            "precisao": m["precision"],
+            "cobertura": m["recall"],
+            "f1": m["f1-score"],
+            "suporte": m["support"],
+        }
+    return {
+        "precisao": precision_score(gold_seqs, pred_seqs),
+        "cobertura": recall_score(gold_seqs, pred_seqs),
+        "f1": f1_score(gold_seqs, pred_seqs),
+        "por_tipo": por_tipo,
+    }
