@@ -57,3 +57,23 @@ python run_llm.py --modelo llama3.1:8b --tarefa upos --reiniciar
 6. Gerar a tabela final dos 5 modelos
 
 python agregar.py --base base_mapeada
+
+
+monitoramento
+
+ while ($true) {
+>>   $ts = Get-Date -Format "HH:mm:ss"
+>>   $linha = python -c @"
+>> import json, os, glob
+>> arqs = glob.glob('resultados/base_mapeada/*/*.jsonl')
+>> out = []
+>> for f in sorted(arqs):
+>>     nome = f.replace('resultados/base_mapeada/','').replace('.jsonl','').replace('\\','/')
+>>     n = len(set(json.loads(l)['sentenca_id'] for l in open(f,encoding='utf-8') if l.strip()))
+>>     fim = 'OK' if os.path.exists(f.replace('.jsonl','.meta.json')) and n>=1167 else f'{round(100*n/1167)}%'
+>>     out.append(f'{nome}={n}/1167({fim})')
+>> print(' | '.join(out))
+>> "@
+>>   Write-Host "[$ts] $linha"
+>>   Start-Sleep -Seconds 120
+>> }
