@@ -266,3 +266,56 @@ def test_modelo_preserva_dois_pontos(tmp_path):
     assert ":" not in caminho_padrao, (
         f"caminho_resultado ainda contém ':': {caminho_padrao}"
     )
+
+
+# ---------------------------------------------------------------------------
+# Chunking de sentenças longas (fix gap 03)
+# ---------------------------------------------------------------------------
+
+
+def test_chunking_remonta_tags_alinhadas():
+    """predizer_tags_chunked fatia uma sentença longa e remonta len(tokens) tags."""
+    tokens = [f"tok{i}" for i in range(25)]  # 25 tokens
+    fake = _make_fake_gerar(tag="NOUN")
+    tags, n_fb, eval_count, eval_ns = run_llm.predizer_tags_chunked(
+        "fake", "upos", tokens, fake, chunk=10
+    )
+    # 25 tags remontadas, alinhadas (1:1 com tokens).
+    assert len(tags) == 25
+    assert all(t == "NOUN" for t in tags)
+    assert n_fb == 0  # fake devolve tamanho certo por chunk -> sem fallback
+
+
+def test_chunking_numero_de_chamadas():
+    """Sentença de 25 tokens com chunk=10 => 3 chamadas ao LLM (10+10+5)."""
+    tokens = [f"tok{i}" for i in range(25)]
+    chamadas = []
+
+    def _spy(modelo, prompt, num_predict=None):
+        import re
+        m = re.search(r"Input tokens \((\d+) tokens\)", prompt)
+        n = int(m.group(1))
+        chamadas.append(n)
+        return Resposta(json.dumps(["NOUN"] * n), n, 1_000_000_000, 0, 1_000_000_000)
+
+    run_llm.predizer_tags_chunked("fake", "upos", tokens, _spy, chunk=10)
+    assert chamadas == [10, 10, 5], f"chunks errados: {chamadas}"
+
+
+def test_chunking_fallback_so_no_chunk_que_desconta():
+    """Se um chunk desconta, só os tokens daquele chunk viram fallback (não a sentença toda)."""
+    tokens = [f"tok{i}" for i in range(20)]  # 2 chunks de 10
+
+    def _gerar(modelo, prompt, num_predict=None):
+        import re
+        n = int(re.search(r"Input tokens \((\d+) tokens\)", prompt).group(1))
+        # 1º chunk: tamanho certo (10). 2º chunk: desconta (devolve 8 em vez de 10).
+        saida = 10 if not _gerar.ja else 8
+        _gerar.ja = True
+        return Resposta(json.dumps(["NOUN"] * saida), saida, 1_000_000_000, 0, 1_000_000_000)
+    _gerar.ja = False
+
+    tags, n_fb, _, _ = run_llm.predizer_tags_chunked("fake", "upos", tokens, _gerar, chunk=10)
+    assert len(tags) == 20
+    # Só o 2º chunk (10 tokens) caiu em fallback; o 1º (10) não.
+    assert n_fb == 10, f"esperado 10 fallbacks (só o chunk que descontou), veio {n_fb}"

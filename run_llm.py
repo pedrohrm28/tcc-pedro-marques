@@ -33,6 +33,13 @@ from src.llm.parser import alinhar_tags
 
 LIMITE_PADRAO = 1167
 
+# Tamanho de chunk para sentenças longas (fix gap 03 — descontagem).
+# Medição empírica: os modelos acertam o nº de tags em sentenças de até ~10 tokens (0%
+# descontagem), mas degradam acima disso (11-20 tok: 41%; 31+: ~100%), tanto no 3B quanto
+# no 8B. Solução: fatiar a sentença em janelas de CHUNK_PADRAO tokens, taggear cada janela
+# (onde o modelo conta certo) e remontar na ordem — preserva alinhamento token-a-token.
+CHUNK_PADRAO = 10
+
 LOADERS: dict[str, Callable] = {
     "ner": carregar_gmb,
     "upos": carregar_conllu,
@@ -79,6 +86,57 @@ def _append_registros(caminho: str, registros: list[Registro]) -> None:
         f.flush()
 
 
+def predizer_tags_chunked(
+    modelo: str,
+    tarefa: str,
+    tokens: list[str],
+    fn_gerar: Callable,
+    num_predict: Optional[int] = None,
+    chunk: int = CHUNK_PADRAO,
+) -> tuple[list[str], int, int, int]:
+    """Prediz as tags de uma sentença fatiando-a em janelas de `chunk` tokens.
+
+    Para sentenças longas, os modelos perdem a contagem de tags (descontagem -> fallback
+    total). Fatiar em janelas pequenas (onde o modelo conta certo) e remontar na ordem
+    recupera o alinhamento token-a-token sem aleatoriedade (fix gap 03).
+
+    Cada chunk é uma chamada independente ao LLM; as tags retornadas são concatenadas na
+    ordem dos chunks, reconstruindo uma lista de len(tokens) tags.
+
+    Args:
+        modelo:      nome do modelo Ollama.
+        tarefa:      "ner" ou "upos".
+        tokens:      tokens da sentença inteira (já tokenizados).
+        fn_gerar:    função de geração (injetável; default gerar do cliente_ollama).
+        num_predict: teto de tokens por chamada (se None, derivado do tamanho do chunk).
+        chunk:       tamanho da janela de tokens por chamada.
+
+    Returns:
+        Tupla (tags, n_fallback, eval_count, eval_duration_ns):
+        - tags: lista de tags, len(tags) == len(tokens) SEMPRE.
+        - n_fallback: total de tokens em fallback somando todos os chunks.
+        - eval_count: soma dos tokens gerados pelo LLM em todos os chunks.
+        - eval_duration_ns: soma do tempo de geração de todos os chunks.
+    """
+    tags: list[str] = []
+    n_fb_total = 0
+    eval_count_total = 0
+    eval_ns_total = 0
+
+    for inicio in range(0, len(tokens), chunk):
+        janela = tokens[inicio:inicio + chunk]
+        prompt = montar_prompt(tarefa, janela)
+        np_efetivo = num_predict if num_predict is not None else (len(janela) * 6 + 32)
+        resp = fn_gerar(modelo, prompt, np_efetivo)
+        tags_chunk, n_fb = alinhar_tags(tarefa, janela, resp.texto)
+        tags.extend(tags_chunk)
+        n_fb_total += n_fb
+        eval_count_total += resp.eval_count
+        eval_ns_total += resp.eval_duration_ns
+
+    return tags, n_fb_total, eval_count_total, eval_ns_total
+
+
 # ---------------------------------------------------------------------------
 # Função principal de execução (injetável para testes)
 # ---------------------------------------------------------------------------
@@ -92,6 +150,7 @@ def rodar(
     reiniciar: bool = False,
     fn_gerar: Callable = gerar,
     num_predict: Optional[int] = None,
+    chunk: int = CHUNK_PADRAO,
 ) -> dict:
     """Roda o modelo LLM sobre as sentenças da tarefa e emite o .jsonl incremental.
 
@@ -144,14 +203,11 @@ def rodar(
             continue
 
         tokens_s = [tok for tok, _ in s.pares]
-        prompt = montar_prompt(tarefa, tokens_s)
-        # Teto de tokens por chamada: se não especificado, derivar do nº de tokens.
-        # Cada token gera ~poucos tokens de saída (tag curta + pontuação JSON); ~6/token
-        # + folga de 32 cobre respostas legítimas e CORTA o loop patológico que, com
-        # format=json sem teto, gerava milhares de tokens e estourava o timeout (fix gap 03).
-        np_efetivo = num_predict if num_predict is not None else (len(tokens_s) * 6 + 32)
-        resp = fn_gerar(modelo, prompt, np_efetivo)
-        tags, n_fb = alinhar_tags(tarefa, tokens_s, resp.texto)
+        # Predição com chunking: fatia a sentença em janelas de `chunk` tokens, taggeia
+        # cada uma e remonta — corrige a descontagem em sentenças longas (fix gap 03).
+        tags, n_fb, eval_count, eval_ns = predizer_tags_chunked(
+            modelo, tarefa, tokens_s, fn_gerar, num_predict, chunk
+        )
 
         # Asserção defensiva: o parser garante; se falhar é bug.
         assert len(tags) == len(s.pares), (
@@ -172,9 +228,9 @@ def rodar(
         ]
         _append_registros(caminho_saida, regs)
 
-        # Acumular métricas da sentença.
-        tokens_total += resp.eval_count
-        eval_ns_total += resp.eval_duration_ns
+        # Acumular métricas da sentença (somadas sobre todos os chunks).
+        tokens_total += eval_count
+        eval_ns_total += eval_ns
         sentencas_proc += 1
         fallbacks_total += n_fb
 
@@ -262,6 +318,15 @@ def main(argv: Optional[list[str]] = None) -> int:
         default=None,
         help="Caminho do .jsonl de saída (default: contrato via caminho_resultado).",
     )
+    parser.add_argument(
+        "--chunk",
+        type=int,
+        default=CHUNK_PADRAO,
+        help=(
+            f"Tamanho da janela de tokens por chamada (default {CHUNK_PADRAO}). "
+            "Sentenças longas são fatiadas em janelas deste tamanho p/ evitar descontagem."
+        ),
+    )
     args = parser.parse_args(argv)
 
     caminho_saida = args.saida or caminho_resultado("base_mapeada", args.modelo, args.tarefa)
@@ -274,6 +339,7 @@ def main(argv: Optional[list[str]] = None) -> int:
         reiniciar=args.reiniciar,
         fn_gerar=gerar,
         num_predict=args.num_predict,
+        chunk=args.chunk,
     )
 
     print(
