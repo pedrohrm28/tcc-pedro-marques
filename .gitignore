@@ -4,3 +4,5 @@ __pycache__/
 resultados/*.csv
 resultados/*.json
 modelos/*.pkl
+# Dataset grande (149MB) — excede o limite do GitHub; mantido localmente / fora do git
+datasets/base_mapeada/ner.csv
