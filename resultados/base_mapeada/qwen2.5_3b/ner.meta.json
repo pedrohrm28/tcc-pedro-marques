@@ -1,0 +1,11 @@
+{
+  "modelo": "qwen2.5:3b",
+  "tarefa": "ner",
+  "sentencas": 1167,
+  "tokens": 102980,
+  "fallbacks": 1239,
+  "eval_duration_s": 1653.409775986,
+  "tok_por_seg": 62.28341061948092,
+  "sent_por_seg": 0.113682096700417,
+  "wall_clock_s": 10265.468652248383
+}

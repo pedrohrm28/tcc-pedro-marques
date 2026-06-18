@@ -1,0 +1,11 @@
+{
+  "modelo": "llama3.2:3b",
+  "tarefa": "upos",
+  "sentencas": 1167,
+  "tokens": 126461,
+  "fallbacks": 23380,
+  "eval_duration_s": 3194.302183984,
+  "tok_por_seg": 39.58955437405588,
+  "sent_por_seg": 0.1671223793560659,
+  "wall_clock_s": 6982.906804561615
+}
