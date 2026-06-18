@@ -1,0 +1,59 @@
+cd "C:\Users\paula\source\repos\tcc-pedro-marques"
+
+# Confirma que o Ollama está no ar (deve listar 3 modelos)
+& "$env:LOCALAPPDATA\Programs\Ollama\ollama.exe" list
+
+# As rodadas que faltam (qwen ner JÁ está pronto — não rode ele):
+python run_llm.py --modelo qwen2.5:3b  --tarefa upos                 # retoma das 656
+python run_llm.py --modelo llama3.2:3b --tarefa ner  --reiniciar     # regenera c/ chunking
+python run_llm.py --modelo llama3.2:3b --tarefa upos --reiniciar     # regenera c/ chunking
+python run_llm.py --modelo llama3.1:8b --tarefa ner  --reiniciar     # 8B, horas
+python run_llm.py --modelo llama3.1:8b --tarefa upos --reiniciar     # 8B, horas
+
+
+Como saber se voltou a ficar rápido: abra OUTRO PowerShell e rode
+
+
+& "$env:LOCALAPPDATA\Programs\Ollama\ollama.exe" ps
+
+python agregar.py --base base_mapeada
+
+
+
+Comandos na máquina nova
+1. Pré-requisitos (instalar uma vez)
+
+# Git (se não tiver)
+winget install Git.Git
+
+# Python 3.11+ (se não tiver)
+winget install Python.Python.3.11
+
+# Ollama
+winget install Ollama.Ollama
+Feche e reabra o terminal após instalar (para o PATH atualizar).
+
+2. Clonar o projeto
+
+cd "$env:USERPROFILE\source\repos"   # ou onde preferir
+git clone https://github.com/pedrohrm28/tcc-pedro-marques.git
+cd tcc-pedro-marques
+3. Dependências Python
+
+pip install -r requirements.txt
+4. Baixar os 3 modelos no Ollama
+
+ollama pull llama3.1:8b
+ollama pull qwen2.5:3b
+ollama pull llama3.2:3b
+5. Rodar o que falta (com chunking, já é o padrão)
+
+cd tcc-pedro-marques
+# qwen já está pronto no repo — NÃO precisa rodar
+python run_llm.py --modelo llama3.2:3b --tarefa ner  --reiniciar
+python run_llm.py --modelo llama3.2:3b --tarefa upos --reiniciar
+python run_llm.py --modelo llama3.1:8b --tarefa ner  --reiniciar
+python run_llm.py --modelo llama3.1:8b --tarefa upos --reiniciar
+6. Gerar a tabela final dos 5 modelos
+
+python agregar.py --base base_mapeada
