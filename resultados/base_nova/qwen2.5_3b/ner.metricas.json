@@ -1,0 +1,108 @@
+{
+  "modelo": "qwen2.5:3b",
+  "tarefa": "ner",
+  "por_classe": [
+    {
+      "classe": "B-LOC",
+      "precisao": 0.58,
+      "cobertura": 0.7073170731707317,
+      "f1": 0.6373626373626374,
+      "suporte": 82
+    },
+    {
+      "classe": "B-MISC",
+      "precisao": 0.038461538461538464,
+      "cobertura": 0.18181818181818182,
+      "f1": 0.0634920634920635,
+      "suporte": 22
+    },
+    {
+      "classe": "B-ORG",
+      "precisao": 0.07142857142857142,
+      "cobertura": 0.5,
+      "f1": 0.125,
+      "suporte": 2
+    },
+    {
+      "classe": "B-PER",
+      "precisao": 0.45,
+      "cobertura": 0.4864864864864865,
+      "f1": 0.4675324675324675,
+      "suporte": 111
+    },
+    {
+      "classe": "I-LOC",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 9
+    },
+    {
+      "classe": "I-MISC",
+      "precisao": 0.05,
+      "cobertura": 0.25,
+      "f1": 0.08333333333333334,
+      "suporte": 12
+    },
+    {
+      "classe": "I-ORG",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 1
+    },
+    {
+      "classe": "I-PER",
+      "precisao": 0.5797101449275363,
+      "cobertura": 0.41237113402061853,
+      "f1": 0.4819277108433735,
+      "suporte": 97
+    },
+    {
+      "classe": "O",
+      "precisao": 0.9038674033149171,
+      "cobertura": 0.7532228360957642,
+      "f1": 0.8216976393771974,
+      "suporte": 1086
+    }
+  ],
+  "micro": {
+    "precisao": 0.6877637130801688,
+    "cobertura": 0.6877637130801688,
+    "f1": 0.6877637130801688
+  },
+  "entidade": {
+    "precisao": 0.25,
+    "cobertura": 0.41935483870967744,
+    "f1": 0.3132530120481927,
+    "por_tipo": {
+      "LOC": {
+        "precisao": 0.4205607476635514,
+        "cobertura": 0.5487804878048781,
+        "f1": 0.4761904761904762,
+        "suporte": 82
+      },
+      "MISC": {
+        "precisao": 0.009009009009009009,
+        "cobertura": 0.045454545454545456,
+        "f1": 0.015037593984962407,
+        "suporte": 22
+      },
+      "ORG": {
+        "precisao": 0.07142857142857142,
+        "cobertura": 0.5,
+        "f1": 0.125,
+        "suporte": 2
+      },
+      "PER": {
+        "precisao": 0.3333333333333333,
+        "cobertura": 0.3963963963963964,
+        "f1": 0.3621399176954732,
+        "suporte": 111
+      }
+    }
+  },
+  "n_tokens": 1422,
+  "tempo": null,
+  "velocidade": null
+}

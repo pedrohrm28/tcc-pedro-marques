@@ -63,3 +63,32 @@ ollama pull llama3.1:8b ; ollama pull qwen2.5:3b ; ollama pull llama3.2:3b
 
 # Datasets da base nova (eng.testb, pt_gsd-ud-test.conllu) e ner.csv NAO estao no git.
 # Copie a pasta datasets/ manualmente (pendrive/Drive) se for rodar na maquina nova.
+
+
+PS C:\Users\paula\source\repos\tcc-pedro-marques> python rodar_base_nova.py --modelo qwen2.5:3b
+[base_nova] qwen2.5:3b ner: 100 sentencas novas, 617.3s
+[base_nova] qwen2.5:3b upos: 100 sentencas novas, 1043.6s
+PS C:\Users\paula\source\repos\tcc-pedro-marques> python rodar_base_nova.py --modelo llama3.2:3b
+[base_nova] llama3.2:3b ner: 100 sentencas novas, 699.1s
+[base_nova] llama3.2:3b upos: 100 sentencas novas, 1189.6s
+PS C:\Users\paula\source\repos\tcc-pedro-marques> python rodar_base_nova.py --modelo llama3.1:8b
+[base_nova] llama3.1:8b ner: 100 sentencas novas, 1497.9s
+[base_nova] llama3.1:8b upos: 100 sentencas novas, 2830.5s
+PS C:\Users\paula\source\repos\tcc-pedro-marques> python agregar.py --base base_nova
+[agregar] base=base_nova — 8 presente(s).
+[agregar] ausente: crf/upos
+[agregar] ausente: regras/ner
+[agregar] gerado: resultados\base_nova\crf\ner.metricas.json
+[agregar] gerado: resultados\base_nova\regras\upos.metricas.json
+[agregar] gerado: resultados\base_nova\llama3.1_8b\ner.metricas.json
+[agregar] gerado: resultados\base_nova\llama3.1_8b\upos.metricas.json
+[agregar] gerado: resultados\base_nova\qwen2.5_3b\ner.metricas.json
+[agregar] gerado: resultados\base_nova\qwen2.5_3b\upos.metricas.json
+[agregar] gerado: resultados\base_nova\llama3.2_3b\ner.metricas.json
+[agregar] gerado: resultados\base_nova\llama3.2_3b\upos.metricas.json
+[agregar] gerado: resultados\base_nova\tabela_ner.md
+[agregar] gerado: resultados\base_nova\tabela_ner.csv
+[agregar] gerado: resultados\base_nova\tabela_upos.md
+[agregar] gerado: resultados\base_nova\tabela_upos.csv
+[agregar] gerado: resultados\base_nova\discrepancias.csv
+PS C:\Users\paula\source\repos\tcc-pedro-marques>

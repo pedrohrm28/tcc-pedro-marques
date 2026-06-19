@@ -1,2 +1,5 @@
 modelo,precisao,cobertura,micro_f1,tempo_s,tok_s
 regras,0.859,0.859,0.859,—,—
+llama3.1:8b,0.765,0.765,0.765,—,—
+qwen2.5:3b,0.536,0.536,0.536,—,—
+llama3.2:3b,0.419,0.419,0.419,—,—
