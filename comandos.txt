@@ -1,79 +1,65 @@
-cd "C:\Users\vanto\source\repos\tcc-pedro-marques"
+============================================================
+ COMANDOS — Fase 5 (base nova) + agregacao final
+============================================================
+Rode num PowerShell na raiz do projeto:
+  cd "C:\Users\paula\source\repos\tcc-pedro-marques"
 
-# Confirma que o Ollama está no ar (deve listar 3 modelos)
-& "$env:LOCALAPPDATA\Programs\Ollama\ollama.exe" list
+Pre-requisito: Ollama no ar com os 3 modelos (llama3.1:8b, qwen2.5:3b, llama3.2:3b).
+  Verificar:  & "$env:LOCALAPPDATA\Programs\Ollama\ollama.exe" list
 
-# As rodadas que faltam (qwen ner JÁ está pronto — não rode ele):
-python run_llm.py --modelo qwen2.5:3b  --tarefa upos                 # retoma das 656
-python run_llm.py --modelo llama3.2:3b --tarefa ner  --reiniciar     # regenera c/ chunking
-python run_llm.py --modelo llama3.2:3b --tarefa upos --reiniciar     # regenera c/ chunking
-python run_llm.py --modelo llama3.1:8b --tarefa ner  --reiniciar     # 8B, horas
-python run_llm.py --modelo llama3.1:8b --tarefa upos --reiniciar     # 8B, horas
+DICA DE RAM (maquina de 7,8GB): feche o VS Code e apps pesados antes de rodar os LLMs,
+senao o modelo recarrega do disco a cada sentenca (lento). Numa maquina mais potente,
+nao precisa. Tudo e RETOMAVEL: se travar/fechar, re-rode o MESMO comando que continua.
 
+------------------------------------------------------------
+ ESTADO ATUAL (ja prontos — NAO precisa rodar)
+------------------------------------------------------------
+ base_mapeada: TODOS os 5 modelos x 2 tarefas        -> COMPLETO
+ base_nova:    crf/ner (100) e regras/upos (100)     -> COMPLETO
+ base_nova:    os 3 LLMs                              -> FALTAM (passo 1 abaixo)
 
-Como saber se voltou a ficar rápido: abra OUTRO PowerShell e rode
+------------------------------------------------------------
+ 1) LLMs na BASE NOVA  (NER CoNLL-2003 + UPOS GSD, 100 sent cada)
+    Cada comando roda NER e UPOS do modelo. Rapidos primeiro, 8B por ultimo.
+------------------------------------------------------------
+python rodar_base_nova.py --modelo qwen2.5:3b
+python rodar_base_nova.py --modelo llama3.2:3b
+python rodar_base_nova.py --modelo llama3.1:8b
 
+# (Alternativa: rodar tudo de uma vez; pula crf/regras que ja estao feitos)
+# python rodar_base_nova.py --todos
 
-& "$env:LOCALAPPDATA\Programs\Ollama\ollama.exe" ps
+------------------------------------------------------------
+ 2) Conferir se o modelo esta residente (opcional, 2o terminal)
+------------------------------------------------------------
+& "$env:LOCALAPPDATA\Programs\Ollama\ollama.exe" ps    # UNTIL Forever = bom (rapido)
 
+------------------------------------------------------------
+ 3) Agregar a BASE NOVA (so depois dos 3 LLMs terminarem)
+    Aplica o mapeamento de tipos NER {PER,ORG,LOC,MISC} no gold E nas predicoes.
+------------------------------------------------------------
+python agregar.py --base base_nova
+
+# Saidas em resultados/base_nova/:
+#   tabela_ner.md / .csv, tabela_upos.md / .csv, discrepancias.csv, *.metricas.json
+
+------------------------------------------------------------
+ 4) (Ja feito) Re-agregar a base mapeada, se quiser
+------------------------------------------------------------
 python agregar.py --base base_mapeada
 
-
-
-Comandos na máquina nova
-1. Pré-requisitos (instalar uma vez)
-
-# Git (se não tiver)
+============================================================
+ Na MAQUINA NOVA (do zero): instalar e clonar
+============================================================
 winget install Git.Git
-
-# Python 3.11+ (se não tiver)
 winget install Python.Python.3.11
-
-# Ollama
 winget install Ollama.Ollama
-Feche e reabra o terminal após instalar (para o PATH atualizar).
+# feche e reabra o terminal apos instalar
 
-2. Clonar o projeto
-
-cd "$env:USERPROFILE\source\repos"   # ou onde preferir
 git clone https://github.com/pedrohrm28/tcc-pedro-marques.git
 cd tcc-pedro-marques
-3. Dependências Python
-
 pip install -r requirements.txt
-4. Baixar os 3 modelos no Ollama
+ollama pull llama3.1:8b ; ollama pull qwen2.5:3b ; ollama pull llama3.2:3b
 
-ollama pull llama3.1:8b
-ollama pull qwen2.5:3b
-ollama pull llama3.2:3b
-5. Rodar o que falta (com chunking, já é o padrão)
-
-cd tcc-pedro-marques
-# qwen já está pronto no repo — NÃO precisa rodar
-python run_llm.py --modelo llama3.2:3b --tarefa ner  --reiniciar
-python run_llm.py --modelo llama3.2:3b --tarefa upos --reiniciar
-python run_llm.py --modelo llama3.1:8b --tarefa ner  --reiniciar
-python run_llm.py --modelo llama3.1:8b --tarefa upos --reiniciar
-6. Gerar a tabela final dos 5 modelos
-
-python agregar.py --base base_mapeada
-
-
-monitoramento
-
- while ($true) {
->>   $ts = Get-Date -Format "HH:mm:ss"
->>   $linha = python -c @"
->> import json, os, glob
->> arqs = glob.glob('resultados/base_mapeada/*/*.jsonl')
->> out = []
->> for f in sorted(arqs):
->>     nome = f.replace('resultados/base_mapeada/','').replace('.jsonl','').replace('\\','/')
->>     n = len(set(json.loads(l)['sentenca_id'] for l in open(f,encoding='utf-8') if l.strip()))
->>     fim = 'OK' if os.path.exists(f.replace('.jsonl','.meta.json')) and n>=1167 else f'{round(100*n/1167)}%'
->>     out.append(f'{nome}={n}/1167({fim})')
->> print(' | '.join(out))
->> "@
->>   Write-Host "[$ts] $linha"
->>   Start-Sleep -Seconds 120
->> }
+# Datasets da base nova (eng.testb, pt_gsd-ud-test.conllu) e ner.csv NAO estao no git.
+# Copie a pasta datasets/ manualmente (pendrive/Drive) se for rodar na maquina nova.

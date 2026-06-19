@@ -1,0 +1,3 @@
+| modelo | precisao | cobertura | micro_f1 | tempo_s | tok_s |
+| --- | --- | --- | --- | --- | --- |
+| regras | 0.859 | 0.859 | 0.859 | — | — |

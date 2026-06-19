@@ -30,14 +30,21 @@ from typing import Optional
 
 from src.io.contrato import caminho_resultado, ler_jsonl
 from src.io.corpora import Sentenca, carregar_conllu, carregar_gmb
+from src.io.corpora_nova import carregar_conll2003  # base nova: NER CoNLL-2003
+from src.io.mapa_ner import mapear_sequencia        # base nova: mapeia esquemas NER
 from src.metricas import metricas_entidade, metricas_token
 
 # 5 modelos esperados, na ordem em que aparecem nas tabelas (D-03).
 MODELOS_ESPERADOS = ["crf", "regras", "llama3.1:8b", "qwen2.5:3b", "llama3.2:3b"]
-# Loader do gold por tarefa (D-05).
+# Loader do gold por tarefa (D-05) — base mapeada.
 LOADERS_GOLD = {"ner": carregar_gmb, "upos": carregar_conllu}
 TAREFAS = ("ner", "upos")
 LIMITE_PADRAO = 1167
+
+# Base nova (Fase 5): gold de DOMÍNIO DIFERENTE + limite menor.
+LIMITE_BASE_NOVA = 100
+CONLL2003_PATH = "datasets/base_nova/eng.testb"
+GSD_PATH = "datasets/base_nova/pt_gsd-ud-test.conllu"
 
 # Marcador usado quando uma predição não cobre uma posição do gold (coerente
 # com o ``alinhar`` legado de src/metricas.py, que usa "X-AUSENTE").
@@ -47,8 +54,20 @@ TAG_AUSENTE = "X-AUSENTE"
 # --- Task 1: núcleo (gold, alinhamento, métricas, JSON) --------------------
 
 
-def carregar_gold(tarefa: str, limite: int = LIMITE_PADRAO) -> list[Sentenca]:
-    """Carrega o gold da tarefa via o loader correto (D-05)."""
+def carregar_gold(tarefa: str, limite: int = LIMITE_PADRAO, base: str = "base_mapeada"):
+    """Carrega o gold da tarefa, ciente da base.
+
+    base_mapeada: GMB (ner) / Bosque-test (upos) — esquema original.
+    base_nova:    CoNLL-2003 (ner, esquema PER/ORG/LOC/MISC) / UD-GSD (upos) — domínio diferente.
+    """
+    if base == "base_nova":
+        if tarefa == "ner":
+            # SentencaPos tem .pares (token, tag IOB2) — compatível com indexar_gold/alinhar.
+            return carregar_conll2003(caminho=CONLL2003_PATH, limite=limite)
+        if tarefa == "upos":
+            return carregar_conllu(caminho=GSD_PATH, limite=limite)
+        raise ValueError(f"tarefa desconhecida: {tarefa!r}")
+    # base mapeada (default)
     loader = LOADERS_GOLD.get(tarefa)
     if loader is None:
         raise ValueError(f"tarefa desconhecida: {tarefa!r} (use {tuple(LOADERS_GOLD)})")
@@ -328,15 +347,29 @@ def agregar(base: str, limite: int = LIMITE_PADRAO) -> dict:
     linhas_por_tarefa: dict[str, list[dict]] = {t: [] for t in TAREFAS}
     discrepancias_todas: list[list] = []
 
+    # Na base nova + NER, os esquemas de tipo divergem (CoNLL-2003 vs GMB) — mapear
+    # gold E predições para {PER,ORG,LOC,MISC} antes de medir (decisão Fase 5).
+    mapear_ner = (base == "base_nova")
+
     for modelo, tarefa in presentes:
         try:
             if tarefa not in cache_gold:
-                cache_gold[tarefa] = carregar_gold(tarefa, limite=limite)
+                cache_gold[tarefa] = carregar_gold(tarefa, limite=limite, base=base)
             gold = cache_gold[tarefa]
 
             caminho_jsonl = caminho_resultado(base, modelo, tarefa)
             registros = ler_jsonl(caminho_jsonl)
             gold_seqs, pred_seqs, discrepancias = alinhar_predicao(gold, registros)
+
+            if mapear_ner and tarefa == "ner":
+                gold_seqs = [mapear_sequencia(seq) for seq in gold_seqs]
+                pred_seqs = [mapear_sequencia(seq) for seq in pred_seqs]
+                # re-derivar discrepancias apos o mapeamento (so onde gold!=pred mapeados)
+                discrepancias = [
+                    [sid, pos, tok, mapear_sequencia([g])[0], mapear_sequencia([p])[0]]
+                    for (sid, pos, tok, g, p) in discrepancias
+                    if mapear_sequencia([g])[0] != mapear_sequencia([p])[0]
+                ]
 
             metricas = calcular_metricas(tarefa, gold_seqs, pred_seqs)
             tempo, velocidade = ler_meta(caminho_jsonl)
@@ -387,11 +420,16 @@ def main(argv: Optional[list[str]] = None) -> int:
     )
     parser.add_argument("--base", default="base_mapeada", help="base_mapeada ou base_nova.")
     parser.add_argument(
-        "--limite", type=int, default=LIMITE_PADRAO, help="Nº de sentenças do gold."
+        "--limite", type=int, default=None,
+        help="Nº de sentenças do gold. Default: 1167 (mapeada) / 100 (nova).",
     )
     args = parser.parse_args(argv)
 
-    resumo = agregar(args.base, limite=args.limite)
+    limite = args.limite
+    if limite is None:
+        limite = LIMITE_BASE_NOVA if args.base == "base_nova" else LIMITE_PADRAO
+
+    resumo = agregar(args.base, limite=limite)
 
     print(f"[agregar] base={args.base} — {len(resumo['presentes'])} presente(s).")
     for modelo, tarefa in resumo["ausentes"]:

@@ -2,3 +2,4 @@ requests
 seqeval
 sklearn-crfsuite
 scikit-learn
+nltk
