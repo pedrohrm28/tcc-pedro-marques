@@ -1,0 +1,2241 @@
+{
+  "modelo": "llama3.2:3b",
+  "tarefa": "ner",
+  "por_classe": [
+    {
+      "classe": "B-British",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-Moscow",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-U.N.",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-army",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-art",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 43
+    },
+    {
+      "classe": "B-att",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-australia",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-bomber",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-british",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-company",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-contract",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-cou",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-counterpart",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-court",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-cro",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-currency",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-custody",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-dep",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-drug",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-eth",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-eve",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 20
+    },
+    {
+      "classe": "B-explosion",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-faith",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-firm",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-gang",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-geo",
+      "precisao": 0.12401471361008934,
+      "cobertura": 0.34202898550724636,
+      "f1": 0.18202853837254146,
+      "suporte": 690
+    },
+    {
+      "classe": "B-gov",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-gpe",
+      "precisao": 0.10309278350515463,
+      "cobertura": 0.032679738562091505,
+      "f1": 0.04962779156327544,
+      "suporte": 612
+    },
+    {
+      "classe": "B-guy",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-hon",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-hosp",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-hum",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-industry",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-insurgent",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-japanese",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-leader",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-loc",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-madrassas",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-match",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-med",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-mil",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-militant",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-militants",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-military",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-mone",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-murder",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-nat",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 13
+    },
+    {
+      "classe": "B-num",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-org",
+      "precisao": 0.088016967126193,
+      "cobertura": 0.162109375,
+      "f1": 0.1140893470790378,
+      "suporte": 512
+    },
+    {
+      "classe": "B-organization",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-pak",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-per",
+      "precisao": 0.11538461538461539,
+      "cobertura": 0.26932668329177056,
+      "f1": 0.16155572176514582,
+      "suporte": 401
+    },
+    {
+      "classe": "B-pers",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-person",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-plan",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-pol",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-police",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-province",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-reb",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-tech",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-tim",
+      "precisao": 0.45864661654135336,
+      "cobertura": 0.1412037037037037,
+      "f1": 0.215929203539823,
+      "suporte": 432
+    },
+    {
+      "classe": "B-tribal",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-usa",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-victims",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-win",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-yemeni",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-Council",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-Hussein",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-ORG",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-Tamil",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-agency",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-agreement",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-aircraft",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-airline",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-al-Rubaei",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-annual",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-army",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-art",
+      "precisao": 0.001282051282051282,
+      "cobertura": 0.04,
+      "f1": 0.002484472049689441,
+      "suporte": 25
+    },
+    {
+      "classe": "I-at",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-att",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-australia",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-auto",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-by",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-citizen",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-coalition",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-comes",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-conference",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-contract",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-convoy",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-court",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-cro",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-currency",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-dark",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-date",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-day",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-defense",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-dep",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-died",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-draft",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-drug",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-drugmaker",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-energy",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-environmentally",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-eth",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-eve",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 16
+    },
+    {
+      "classe": "I-exchange",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-execution",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-explosion",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-ext",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-face",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-fed",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-fire",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-firm",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-five",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-for",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-forces",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-from",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-fuel",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-gang",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-gas",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-geo",
+      "precisao": 0.016264722378014584,
+      "cobertura": 0.2196969696969697,
+      "f1": 0.03028720626631854,
+      "suporte": 132
+    },
+    {
+      "classe": "I-gov",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-gpe",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 27
+    },
+    {
+      "classe": "I-guy",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-hard-line",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-has",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-hideout",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-his",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-hospital",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-hum",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-hypertension",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-in",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-its",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-leader",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-lists",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-loc",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-med",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-medical",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-mil",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-militant",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-militants",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-military",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-mission",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-mone",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-mswati",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-murder",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-nat",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 7
+    },
+    {
+      "classe": "I-naval",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-num",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-of",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-officials",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-org",
+      "precisao": 0.027559055118110236,
+      "cobertura": 0.12612612612612611,
+      "f1": 0.045234248788368334,
+      "suporte": 333
+    },
+    {
+      "classe": "I-organization",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-over",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-pak",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-passenger",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-pawn",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-per",
+      "precisao": 0.07670454545454546,
+      "cobertura": 0.22641509433962265,
+      "f1": 0.11458885941644562,
+      "suporte": 477
+    },
+    {
+      "classe": "I-person",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-pipeline",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-pol",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-police",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-power",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-pro",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-protest",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-province",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-quot",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-reb",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-rebel",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-region",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-reporters",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-rus",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-scheduled",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-security",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-seen",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-ship",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-special",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-spotted",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-state",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-supp",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-suspected",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-tech",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-the",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-tim",
+      "precisao": 0.054373522458628844,
+      "cobertura": 0.23469387755102042,
+      "f1": 0.08829174664107486,
+      "suporte": 98
+    },
+    {
+      "classe": "I-troop",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-usa",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-warrant",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-was",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-win",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-with",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-yemeni",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "O",
+      "precisao": 0.9284070916226823,
+      "cobertura": 0.6230982333439302,
+      "f1": 0.7457129657309021,
+      "suporte": 22019
+    }
+  ],
+  "micro": {
+    "precisao": 0.5581080558456124,
+    "cobertura": 0.5581080558456124,
+    "f1": 0.5581080558456124
+  },
+  "entidade": {
+    "precisao": 0.053578262533486416,
+    "cobertura": 0.15424164524421594,
+    "f1": 0.07953039197121757,
+    "por_tipo": {
+      "British": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "Council": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "Hussein": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "Moscow": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "ORG": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "Tamil": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "U.N.": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "agency": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "agreement": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "aircraft": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "airline": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "al-Rubaei": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "annual": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "army": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "art": {
+        "precisao": 0.0027739251040221915,
+        "cobertura": 0.046511627906976744,
+        "f1": 0.005235602094240838,
+        "suporte": 43
+      },
+      "at": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "att": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "australia": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "auto": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "bomber": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "british": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "by": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "citizen": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "coalition": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "comes": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "company": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "conference": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "contract": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "convoy": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "cou": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "counterpart": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "court": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "cro": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "currency": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "custody": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "dark": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "date": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "day": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "defense": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "dep": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "died": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "draft": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "drug": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "drugmaker": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "energy": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "environmentally": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "eth": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "eve": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 20
+      },
+      "exchange": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "execution": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "explosion": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "ext": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "face": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "faith": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "fed": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "fire": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "firm": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "five": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "for": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "forces": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "from": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "fuel": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "gang": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "gas": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "geo": {
+        "precisao": 0.07755905511811023,
+        "cobertura": 0.2855072463768116,
+        "f1": 0.12198142414860681,
+        "suporte": 690
+      },
+      "gov": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "gpe": {
+        "precisao": 0.030985915492957747,
+        "cobertura": 0.017973856209150325,
+        "f1": 0.022750775594622543,
+        "suporte": 612
+      },
+      "guy": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "hard-line": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "has": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "hideout": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "his": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "hon": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "hosp": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "hospital": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "hum": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "hypertension": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "in": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "industry": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "insurgent": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "its": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "japanese": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "leader": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "lists": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "loc": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "madrassas": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "match": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "med": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "medical": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "mil": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "militant": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "militants": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "military": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "mission": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "mone": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "mswati": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "murder": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "nat": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 13
+      },
+      "naval": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "num": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "of": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "officials": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "org": {
+        "precisao": 0.01981981981981982,
+        "cobertura": 0.064453125,
+        "f1": 0.030316949931097844,
+        "suporte": 512
+      },
+      "organization": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "over": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "pak": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "passenger": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "pawn": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "per": {
+        "precisao": 0.051171393341553635,
+        "cobertura": 0.20698254364089774,
+        "f1": 0.08205635195254572,
+        "suporte": 401
+      },
+      "pers": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "person": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "pipeline": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "plan": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "pol": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "police": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "power": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "pro": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "protest": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "province": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "quot": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "reb": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "rebel": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "region": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "reporters": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "rus": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "scheduled": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "security": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "seen": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "ship": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "special": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "spotted": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "state": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "supp": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "suspected": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "tech": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "the": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "tim": {
+        "precisao": 0.20042643923240938,
+        "cobertura": 0.2175925925925926,
+        "f1": 0.20865704772475027,
+        "suporte": 432
+      },
+      "tribal": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "troop": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "usa": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "victims": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "warrant": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "was": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "win": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "with": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "yemeni": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      }
+    }
+  },
+  "n_tokens": 25857,
+  "tempo": 1624.632445976,
+  "velocidade": 47.5430613190776
+}

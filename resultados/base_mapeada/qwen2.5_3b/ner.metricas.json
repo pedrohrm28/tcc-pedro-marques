@@ -1,0 +1,1082 @@
+{
+  "modelo": "qwen2.5:3b",
+  "tarefa": "ner",
+  "por_classe": [
+    {
+      "classe": "B-I-art",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-I-conversion",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-I-gpe",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-I-per",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-I-temp",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-IPE",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-Ive",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-acct",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-act",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-action",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-administrative",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-art",
+      "precisao": 0.015558698727015558,
+      "cobertura": 0.2558139534883721,
+      "f1": 0.029333333333333336,
+      "suporte": 43
+    },
+    {
+      "classe": "B-civ",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-civ-prov",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-clin-diag",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-com",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-country",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-cr",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-cv",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-datetime",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-eve",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 20
+    },
+    {
+      "classe": "B-event",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-geo",
+      "precisao": 0.1951219512195122,
+      "cobertura": 0.11594202898550725,
+      "f1": 0.14545454545454545,
+      "suporte": 690
+    },
+    {
+      "classe": "B-gp",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-gpe",
+      "precisao": 0.17857142857142858,
+      "cobertura": 0.3758169934640523,
+      "f1": 0.2421052631578947,
+      "suporte": 612
+    },
+    {
+      "classe": "B-means",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-med",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-medical",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-medical-entity",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-medical_condition",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-misc",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-nat",
+      "precisao": 0.025,
+      "cobertura": 0.23076923076923078,
+      "f1": 0.045112781954887216,
+      "suporte": 13
+    },
+    {
+      "classe": "B-nat:rel",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-num",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-official",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-org",
+      "precisao": 0.24413145539906103,
+      "cobertura": 0.203125,
+      "f1": 0.22174840085287847,
+      "suporte": 512
+    },
+    {
+      "classe": "B-oth",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-parole",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-per",
+      "precisao": 0.12485345838218054,
+      "cobertura": 0.5311720698254364,
+      "f1": 0.20218319886093972,
+      "suporte": 401
+    },
+    {
+      "classe": "B-per.",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-per:org:per",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-person",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-personnel",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-pharmaceutical",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-prod",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-set",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-shr",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-temp",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-temperatures",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-tim",
+      "precisao": 0.3774597495527728,
+      "cobertura": 0.48842592592592593,
+      "f1": 0.4258324924318869,
+      "suporte": 432
+    },
+    {
+      "classe": "B-ve",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-vi",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-viol-eng",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-vir",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-宗教派别",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-\"",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-acct",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-act",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-art",
+      "precisao": 0.00784313725490196,
+      "cobertura": 0.16,
+      "f1": 0.014953271028037384,
+      "suporte": 25
+    },
+    {
+      "classe": "I-civ",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-clin-diag",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-conversion",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-costs",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-cr",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-effect",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-emp",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-environ:tim",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-eve",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 16
+    },
+    {
+      "classe": "I-event",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-geo",
+      "precisao": 0.028846153846153848,
+      "cobertura": 0.06818181818181818,
+      "f1": 0.040540540540540536,
+      "suporte": 132
+    },
+    {
+      "classe": "I-gp",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-gp-e",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-gpe",
+      "precisao": 0.01436265709156194,
+      "cobertura": 0.2962962962962963,
+      "f1": 0.027397260273972605,
+      "suporte": 27
+    },
+    {
+      "classe": "I-medical",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-medical-entity",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-medical_condition",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-misc",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-nat",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 7
+    },
+    {
+      "classe": "I-num",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-official",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-org",
+      "precisao": 0.14760147601476015,
+      "cobertura": 0.12012012012012012,
+      "f1": 0.1324503311258278,
+      "suporte": 333
+    },
+    {
+      "classe": "I-oth",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-per",
+      "precisao": 0.2392638036809816,
+      "cobertura": 0.49056603773584906,
+      "f1": 0.32164948453608244,
+      "suporte": 477
+    },
+    {
+      "classe": "I-per:B-per",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-per:org:per",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-prod",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-reg",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-set",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-temperatures",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-tim",
+      "precisao": 0.072,
+      "cobertura": 0.2755102040816326,
+      "f1": 0.11416490486257927,
+      "suporte": 98
+    },
+    {
+      "classe": "I-tim:geo",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-ve",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-vir",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "O",
+      "precisao": 0.950950950950951,
+      "cobertura": 0.7334574685498887,
+      "f1": 0.8281626583252141,
+      "suporte": 22019
+    }
+  ],
+  "micro": {
+    "precisao": 0.6699926518931044,
+    "cobertura": 0.6699926518931044,
+    "f1": 0.6699926518931044
+  },
+  "entidade": {
+    "precisao": 0.10672139558748076,
+    "cobertura": 0.22915901579140655,
+    "f1": 0.1456242707117853,
+    "por_tipo": {
+      "\"": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "I-art": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "I-conversion": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "I-gpe": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "I-per": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "I-temp": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "IPE": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "Ive": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "_": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "acct": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "act": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "action": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "administrative": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "art": {
+        "precisao": 0.009308510638297872,
+        "cobertura": 0.16279069767441862,
+        "f1": 0.01761006289308176,
+        "suporte": 43
+      },
+      "civ": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "civ-prov": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "clin-diag": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "com": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "conversion": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "costs": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "country": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "cr": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "cv": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "datetime": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "effect": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "emp": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "environ:tim": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "eve": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 20
+      },
+      "event": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "geo": {
+        "precisao": 0.12837837837837837,
+        "cobertura": 0.08260869565217391,
+        "f1": 0.10052910052910052,
+        "suporte": 690
+      },
+      "gp": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "gp-e": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "gpe": {
+        "precisao": 0.12141779788838612,
+        "cobertura": 0.2630718954248366,
+        "f1": 0.16615067079463364,
+        "suporte": 612
+      },
+      "means": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "med": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "medical": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "medical-entity": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "medical_condition": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "misc": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "nat": {
+        "precisao": 0.016666666666666666,
+        "cobertura": 0.15384615384615385,
+        "f1": 0.03007518796992481,
+        "suporte": 13
+      },
+      "nat:rel": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "num": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "official": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "org": {
+        "precisao": 0.12211981566820276,
+        "cobertura": 0.103515625,
+        "f1": 0.1120507399577167,
+        "suporte": 512
+      },
+      "oth": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "parole": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "per": {
+        "precisao": 0.09255202628696604,
+        "cobertura": 0.42144638403990026,
+        "f1": 0.15177368657386617,
+        "suporte": 401
+      },
+      "per.": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "per:B-per": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "per:org:per": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "person": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "personnel": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "pharmaceutical": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "prod": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "reg": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "set": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "shr": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "temp": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "temperatures": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "tim": {
+        "precisao": 0.2956081081081081,
+        "cobertura": 0.4050925925925926,
+        "f1": 0.34179687500000006,
+        "suporte": 432
+      },
+      "tim:geo": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "ve": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "vi": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "viol-eng": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "vir": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "宗教派别": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      }
+    }
+  },
+  "n_tokens": 25857,
+  "tempo": 1653.409775986,
+  "velocidade": 62.28341061948092
+}

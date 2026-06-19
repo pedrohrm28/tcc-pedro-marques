@@ -1,0 +1,313 @@
+{
+  "modelo": "llama3.1:8b",
+  "tarefa": "ner",
+  "por_classe": [
+    {
+      "classe": "B-art",
+      "precisao": 0.013605442176870748,
+      "cobertura": 0.13953488372093023,
+      "f1": 0.024793388429752067,
+      "suporte": 43
+    },
+    {
+      "classe": "B-date",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-disease",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-eve",
+      "precisao": 0.0037735849056603774,
+      "cobertura": 0.05,
+      "f1": 0.007017543859649123,
+      "suporte": 20
+    },
+    {
+      "classe": "B-geo",
+      "precisao": 0.3765880217785844,
+      "cobertura": 0.6014492753623188,
+      "f1": 0.4631696428571429,
+      "suporte": 690
+    },
+    {
+      "classe": "B-gpe",
+      "precisao": 0.03215434083601286,
+      "cobertura": 0.016339869281045753,
+      "f1": 0.021668472372697724,
+      "suporte": 612
+    },
+    {
+      "classe": "B-mil",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-nat",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 13
+    },
+    {
+      "classe": "B-num",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-org",
+      "precisao": 0.17684377478191912,
+      "cobertura": 0.435546875,
+      "f1": 0.251551043429216,
+      "suporte": 512
+    },
+    {
+      "classe": "B-per",
+      "precisao": 0.1751453488372093,
+      "cobertura": 0.600997506234414,
+      "f1": 0.27124366910523356,
+      "suporte": 401
+    },
+    {
+      "classe": "B-perc",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-reward",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "B-tim",
+      "precisao": 0.711864406779661,
+      "cobertura": 0.5833333333333334,
+      "f1": 0.6412213740458015,
+      "suporte": 432
+    },
+    {
+      "classe": "I-art",
+      "precisao": 0.008849557522123894,
+      "cobertura": 0.08,
+      "f1": 0.01593625498007968,
+      "suporte": 25
+    },
+    {
+      "classe": "I-bri",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-date",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-eve",
+      "precisao": 0.010526315789473684,
+      "cobertura": 0.0625,
+      "f1": 0.018018018018018018,
+      "suporte": 16
+    },
+    {
+      "classe": "I-evt",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-geo",
+      "precisao": 0.11382113821138211,
+      "cobertura": 0.21212121212121213,
+      "f1": 0.14814814814814814,
+      "suporte": 132
+    },
+    {
+      "classe": "I-gpe",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 27
+    },
+    {
+      "classe": "I-mil",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-nat",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 7
+    },
+    {
+      "classe": "I-org",
+      "precisao": 0.19464285714285715,
+      "cobertura": 0.32732732732732733,
+      "f1": 0.24412094064949608,
+      "suporte": 333
+    },
+    {
+      "classe": "I-per",
+      "precisao": 0.39019963702359345,
+      "cobertura": 0.45073375262054505,
+      "f1": 0.4182879377431907,
+      "suporte": 477
+    },
+    {
+      "classe": "I-perc",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "I-tim",
+      "precisao": 0.36585365853658536,
+      "cobertura": 0.30612244897959184,
+      "f1": 0.3333333333333333,
+      "suporte": 98
+    },
+    {
+      "classe": "O",
+      "precisao": 0.96489367343692,
+      "cobertura": 0.8263318043507879,
+      "f1": 0.890253449456894,
+      "suporte": 22019
+    }
+  ],
+  "micro": {
+    "precisao": 0.7629655412460842,
+    "cobertura": 0.7629655412460842,
+    "f1": 0.7629655412460842
+  },
+  "entidade": {
+    "precisao": 0.1723087945548988,
+    "cobertura": 0.35328681601175177,
+    "f1": 0.23163977847339273,
+    "por_tipo": {
+      "art": {
+        "precisao": 0.01303538175046555,
+        "cobertura": 0.16279069767441862,
+        "f1": 0.02413793103448276,
+        "suporte": 43
+      },
+      "bri": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "date": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "disease": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "eve": {
+        "precisao": 0.0035971223021582736,
+        "cobertura": 0.05,
+        "f1": 0.006711409395973155,
+        "suporte": 20
+      },
+      "evt": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "geo": {
+        "precisao": 0.3141405588484335,
+        "cobertura": 0.5376811594202898,
+        "f1": 0.39657936932121857,
+        "suporte": 690
+      },
+      "gpe": {
+        "precisao": 0.027692307692307693,
+        "cobertura": 0.014705882352941176,
+        "f1": 0.0192102454642476,
+        "suporte": 612
+      },
+      "mil": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "nat": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 13
+      },
+      "num": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "org": {
+        "precisao": 0.11594202898550725,
+        "cobertura": 0.3125,
+        "f1": 0.16913319238900634,
+        "suporte": 512
+      },
+      "per": {
+        "precisao": 0.12024456521739131,
+        "cobertura": 0.44139650872817954,
+        "f1": 0.18900160170848906,
+        "suporte": 401
+      },
+      "perc": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "reward": {
+        "precisao": 0.0,
+        "cobertura": 0.0,
+        "f1": 0.0,
+        "suporte": 0
+      },
+      "tim": {
+        "precisao": 0.6370967741935484,
+        "cobertura": 0.5486111111111112,
+        "f1": 0.5895522388059702,
+        "suporte": 432
+      }
+    }
+  },
+  "n_tokens": 25857,
+  "tempo": 2665.793816886,
+  "velocidade": 37.40236749309854
+}

@@ -1,4 +1,4 @@
-cd "C:\Users\paula\source\repos\tcc-pedro-marques"
+cd "C:\Users\vanto\source\repos\tcc-pedro-marques"
 
 # Confirma que o Ollama está no ar (deve listar 3 modelos)
 & "$env:LOCALAPPDATA\Programs\Ollama\ollama.exe" list

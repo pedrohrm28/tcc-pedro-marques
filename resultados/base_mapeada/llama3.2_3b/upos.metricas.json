@@ -1,0 +1,134 @@
+{
+  "modelo": "llama3.2:3b",
+  "tarefa": "upos",
+  "por_classe": [
+    {
+      "classe": "ADJ",
+      "precisao": 0.2736904061212478,
+      "cobertura": 0.3304904051172708,
+      "f1": 0.2994204764971024,
+      "suporte": 1407
+    },
+    {
+      "classe": "ADP",
+      "precisao": 0.5645371577574967,
+      "cobertura": 0.31567436208991495,
+      "f1": 0.404925187032419,
+      "suporte": 4115
+    },
+    {
+      "classe": "ADV",
+      "precisao": 0.3252840909090909,
+      "cobertura": 0.22147001934235977,
+      "f1": 0.26352128883774456,
+      "suporte": 1034
+    },
+    {
+      "classe": "AUX",
+      "precisao": 0.21143847487001732,
+      "cobertura": 0.18401206636500755,
+      "f1": 0.1967741935483871,
+      "suporte": 663
+    },
+    {
+      "classe": "CCONJ",
+      "precisao": 0.09304812834224599,
+      "cobertura": 0.13551401869158877,
+      "f1": 0.11033608116677233,
+      "suporte": 642
+    },
+    {
+      "classe": "DET",
+      "precisao": 0.6107470511140236,
+      "cobertura": 0.3326195574589579,
+      "f1": 0.43068391866913125,
+      "suporte": 4203
+    },
+    {
+      "classe": "INTJ",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 5
+    },
+    {
+      "classe": "NOUN",
+      "precisao": 0.3239986974926734,
+      "cobertura": 0.5910891089108911,
+      "f1": 0.418565519175489,
+      "suporte": 5050
+    },
+    {
+      "classe": "NUM",
+      "precisao": 0.36258278145695366,
+      "cobertura": 0.4294117647058823,
+      "f1": 0.39317773788150806,
+      "suporte": 510
+    },
+    {
+      "classe": "PART",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 0
+    },
+    {
+      "classe": "PRON",
+      "precisao": 0.17684887459807075,
+      "cobertura": 0.28350515463917525,
+      "f1": 0.21782178217821782,
+      "suporte": 970
+    },
+    {
+      "classe": "PROPN",
+      "precisao": 0.5813953488372093,
+      "cobertura": 0.3827751196172249,
+      "f1": 0.46162723600692446,
+      "suporte": 2090
+    },
+    {
+      "classe": "PUNCT",
+      "precisao": 0.8018587360594795,
+      "cobertura": 0.5983356449375867,
+      "f1": 0.6853057982525814,
+      "suporte": 3605
+    },
+    {
+      "classe": "SCONJ",
+      "precisao": 0.04197530864197531,
+      "cobertura": 0.02564102564102564,
+      "f1": 0.03183520599250936,
+      "suporte": 663
+    },
+    {
+      "classe": "SYM",
+      "precisao": 0.06030150753768844,
+      "cobertura": 0.2,
+      "f1": 0.09266409266409266,
+      "suporte": 60
+    },
+    {
+      "classe": "VERB",
+      "precisao": 0.4161490683229814,
+      "cobertura": 0.44614179396788095,
+      "f1": 0.4306238185255199,
+      "suporte": 2553
+    },
+    {
+      "classe": "X",
+      "precisao": 0.0,
+      "cobertura": 0.0,
+      "f1": 0.0,
+      "suporte": 34
+    }
+  ],
+  "micro": {
+    "precisao": 0.4058832053325605,
+    "cobertura": 0.4058832053325605,
+    "f1": 0.4058832053325605
+  },
+  "entidade": null,
+  "n_tokens": 27604,
+  "tempo": 2213.420684965,
+  "velocidade": 56.6625227874308
+}

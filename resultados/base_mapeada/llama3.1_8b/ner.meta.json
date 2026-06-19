@@ -1,0 +1,11 @@
+{
+  "modelo": "llama3.1:8b",
+  "tarefa": "ner",
+  "sentencas": 1167,
+  "tokens": 99707,
+  "fallbacks": 10,
+  "eval_duration_s": 2665.793816886,
+  "tok_por_seg": 37.40236749309854,
+  "sent_por_seg": 0.1037442725946548,
+  "wall_clock_s": 11248.813749551773
+}
